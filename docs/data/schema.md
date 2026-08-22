@@ -16,11 +16,16 @@ Tagline: *Empowering People, Protecting Country, Creating Opportunity.*
 
 ## 1. Domains & owners
 
-| Domain               | Owner | Entities owned            | Data path            |
-|----------------------|-------|---------------------------|----------------------|
-| Sales                | Alice | `customer`, `sale`        | `/data/sales/`       |
-| Assets               | Bob   | `asset`                   | `/data/fleet/`       |
-| Workforce Planning   | Cindy | `employee`, `job`         | `/data/workforce/`   |
+| Domain               | Owner | Entities owned            | Data path                  |
+|----------------------|-------|---------------------------|----------------------------|
+| Sales                | Alice | `customer`, `sale`        | `/docs/data/sales/`        |
+| Assets               | Bob   | `asset`                   | `/docs/data/fleet/`        |
+| Workforce Planning   | Cindy | `employee`, `job`         | `/docs/data/workforce/`    |
+
+> **Note:** datasets live under `/docs/data/` (not repo-root `/data/`) so GitHub
+> Pages — which publishes only `/docs` — serves them to the live dashboards.
+> Dashboards fetch same-origin: from `/docs/<section>/index.html`, use
+> `fetch('../data/<domain>/<file>.json')`. This file (`schema.md`) also lives here.
 
 `job` is the shared **booking calendar**: it references Sales (`sale_id`),
 Assets (`asset_ids[]`) and Workforce (`employee_ids[]`). Everyone reads it; only
@@ -47,7 +52,7 @@ Cindy writes it.
 | employee   | employee_id   | `EMP-###`      | Cindy |
 | job        | job_id        | `JOB-####`     | Cindy |
 
-### customer  (Alice) — `/data/sales/`
+### customer  (Alice) — `/docs/data/sales/`
 `customer_id` `CUST-###`, name, industry (Iron Ore/Gas/Infrastructure…),
 site, account_manager, since (date).
 
@@ -58,7 +63,7 @@ resource_needs { asset_categories:[], employee_roles:[{role,count}] }.
 A **Won** sale spawns one or more `job`s (Cindy resolves resource_needs into real
 asset_ids + employee_ids on the calendar).
 
-### asset  (Bob) — plant / equipment — see `/data/fleet/asset_register.csv`
+### asset  (Bob) — plant / equipment — see `/docs/data/fleet/asset_register.csv`
 `asset_id` `KK-<CAT>-###` (e.g. `KK-HT-001`), category, make_model, year, site,
 status (asset status), acquisition_cost_aud, current_book_value_aud,
 utilisation_pct_ytd (0–100), last_service_date, next_service_due,
@@ -68,7 +73,7 @@ condition (Excellent|Good|Fair), owner_division.
 LV light vehicle · GS generator · PU pump · EM env monitor · WS workshop ·
 AC accommodation · TR trailer.
 
-### employee  (Cindy) — `/data/workforce/`
+### employee  (Cindy) — `/docs/data/workforce/`
 `employee_id` `EMP-###`, name, role, service_line, skills[] (tickets/certs),
 site (home base), status (`Available`|`On Job`|`Leave`), employment_type
 (`Permanent`|`Labour Hire`|`Casual`), indigenous (bool, for empowerment metrics).
@@ -119,7 +124,7 @@ connected through the booking calendar (`job`).
 
 - IDs: uppercase, hyphenated prefix, zero-padded (see §3).
 - Dates ISO `YYYY-MM-DD`. Currency AUD, integer dollars.
-- Each owner writes only files under their `/data/<domain>/` path.
+- Each owner writes only files under their `/docs/data/<domain>/` path.
 - Publish datasets as CSV (spreadsheet-friendly) and/or JSON (site rendering).
 - Before pushing: `git pull --rebase`; edit only your own paths to avoid conflicts.
 
