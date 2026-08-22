@@ -159,6 +159,11 @@ def main():
             warn(f"job {jid}: shortfall={j.get('shortfall')} != crew_required-crew_booked ({cr - cb})")
 
     # --- Resource double-booking (schema §3: no overlap on two jobs) ---
+    # Pooled assets (e.g. the shared light-vehicle pool) are exempt: crews draw
+    # from the pool so overlapping bookings are intentional, not clashes.
+    bookings_obj = load("workforce/bookings.json")
+    pooled = set((bookings_obj or {}).get("pooled_asset_ids", []) if isinstance(bookings_obj, dict) else [])
+    pooled_overlaps = 0
     windows = []
     for j in jobs:
         s, e = parse_d(j.get("start_date", "")), parse_d(j.get("end_date", ""))
@@ -170,7 +175,10 @@ def main():
             j2, s2, e2, a2, m2 = windows[k]
             if overlaps(s1, e1, s2, e2):
                 for aid in set(a1) & set(a2):
-                    warn(f"asset {aid}: double-booked on {j1} and {j2} (overlapping dates)")
+                    if aid in pooled:
+                        pooled_overlaps += 1  # intentional: shared pool, not a clash
+                    else:
+                        warn(f"asset {aid}: double-booked on {j1} and {j2} (overlapping dates)")
                 for eid in set(m1) & set(m2):
                     warn(f"employee {eid}: double-booked on {j1} and {j2} (overlapping dates)")
 
@@ -184,6 +192,9 @@ def main():
         warn(f"Won sales with no job on the calendar yet: {missing}")
     print(f"joins: {len(delivered & sale_ids)} jobs resolve to sales; "
           f"{len(won)} Won sales, {len(delivered)} scheduled.")
+    if pooled:
+        print(f"info: {pooled_overlaps} overlapping booking(s) of pooled assets "
+              f"{sorted(pooled)} exempted from the §3 no-overlap rule (shared pool).")
 
     if WARNINGS:
         print(f"\n⚠ {len(WARNINGS)} warning(s):")
