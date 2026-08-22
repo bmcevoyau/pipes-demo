@@ -4,29 +4,270 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Workforce Planning — KingKira Group</title>
-  <meta name="description" content="KingKira Group workforce planning: employees, rosters &amp; booking calendar (demo).">
+  <meta name="description" content="KingKira Group workforce planning: employees, FIFO rosters, skills compliance &amp; the shared asset + workforce booking calendar (demo).">
   <link rel="stylesheet" href="../assets/css/brand.css">
+  <style>
+    /* section-local helpers, brand-var based */
+    .wf-bar{background:var(--kk-line);border-radius:6px;height:10px;overflow:hidden;min-width:90px}
+    .wf-bar>span{display:block;height:100%;background:var(--kk-orange)}
+    .wf-bar.green>span{background:var(--kk-green)}
+    .wf-bar.amber>span{background:var(--kk-amber)}
+    .wf-bar.red>span{background:var(--kk-red)}
+    .wf-funnel{display:flex;flex-direction:column;gap:8px}
+    .wf-funnel .row{display:flex;align-items:center;gap:12px}
+    .wf-funnel .lbl{width:110px;font-size:.85rem;color:var(--kk-slate);font-weight:600}
+    .wf-funnel .track{flex:1;background:var(--kk-cream);border-radius:6px;overflow:hidden;height:26px;border:1px solid var(--kk-line)}
+    .wf-funnel .fill{height:100%;background:linear-gradient(90deg,var(--kk-navy),var(--kk-slate));color:#fff;display:flex;align-items:center;padding:0 10px;font-size:.8rem;font-weight:700;white-space:nowrap}
+    .wf-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.82rem;color:var(--kk-muted);margin-top:8px}
+    .wf-legend span{display:inline-flex;align-items:center;gap:6px}
+    .wf-dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
 
+  <!-- HERO -->
   <section class="kk-hero" style="padding:56px 0">
     <div class="kk-container">
-      <div class="kk-eyebrow" style="color:var(--kk-gold)">Operations portal</div>
-      <h1>Workforce Planning</h1>
-      <p class="kk-lead">People &amp; skills &middot; FIFO rosters &middot; the shared asset + workforce booking calendar.</p>
+      <div class="kk-eyebrow" style="color:var(--kk-gold)">Operations portal · Workforce Planning</div>
+      <h1>The right people, skilled and on-site</h1>
+      <p class="kk-lead">People &amp; skills &middot; FIFO rosters across the Pilbara &middot; and the shared
+        asset&nbsp;+&nbsp;workforce booking calendar that turns won work into crews on the ground.</p>
+      <span class="kk-hero__tag">Empowering People · Protecting Country · Creating Opportunity</span>
     </div>
   </section>
 
+  <!-- KPI STATS -->
   <section class="kk-section">
     <div class="kk-container">
-      <div class="kk-card" style="border-left:4px solid var(--kk-orange)">
-        <h3 class="kk-mt0">🚧 Section owner: <span style="color:var(--kk-orange-deep)">cindy (Workforce Planning)</span></h3>
-        <p>This is a scaffolded stub with the shared header, footer and brand kit wired up.
-           Cindy — replace this content with the employee master, rosters and the booking calendar.
-           Data lives in <code>/data/workforce/</code>; employees key on <code>EMP-###</code>,
-           bookings on <code>JOB-####</code> (links <code>sale_id</code> ↔ asset_ids[] ↔ employee_ids[]).</p>
-        <p class="kk-mb0"><span class="kk-demo-note">See <code>/docs/README.md</code> for the class list &amp; include.js contract.</span></p>
+      <div class="kk-eyebrow">Workforce at a glance</div>
+      <h2>Key metrics — as at 22 Aug 2026</h2>
+      <div class="kk-grid kk-grid--4">
+        <div class="kk-stat kk-stat--accent">
+          <div class="kk-stat__label">Total headcount</div>
+          <div class="kk-stat__value">380</div>
+          <div class="kk-stat__delta up">▲ vs 349 FY25</div>
+        </div>
+        <div class="kk-stat kk-stat--accent">
+          <div class="kk-stat__label">Indigenous workforce</div>
+          <div class="kk-stat__value">34%</div>
+          <div class="kk-stat__delta up">▲ from 33% · target 38%</div>
+        </div>
+        <div class="kk-stat kk-stat--accent">
+          <div class="kk-stat__label">Open vacancies</div>
+          <div class="kk-stat__value">31</div>
+          <div class="kk-stat__delta down">avg 29 days to fill</div>
+        </div>
+        <div class="kk-stat kk-stat--accent">
+          <div class="kk-stat__label">Certification compliance</div>
+          <div class="kk-stat__value">89%</div>
+          <div class="kk-stat__delta up">▲ 2 pts QoQ</div>
+        </div>
+      </div>
+      <div class="kk-grid kk-grid--4" style="margin-top:var(--kk-gap)">
+        <div class="kk-stat">
+          <div class="kk-stat__label">FIFO workforce</div>
+          <div class="kk-stat__value">58%</div>
+          <div class="kk-stat__delta">2:1 &amp; 8:6 rosters</div>
+        </div>
+        <div class="kk-stat">
+          <div class="kk-stat__label">12-mth attrition</div>
+          <div class="kk-stat__value">21%</div>
+          <div class="kk-stat__delta up">▼ from 26% FY24</div>
+        </div>
+        <div class="kk-stat">
+          <div class="kk-stat__label">Active traineeships</div>
+          <div class="kk-stat__value">19</div>
+          <div class="kk-stat__delta up">target 28</div>
+        </div>
+        <div class="kk-stat">
+          <div class="kk-stat__label">Next-qtr resourcing gap</div>
+          <div class="kk-stat__value">-42</div>
+          <div class="kk-stat__delta down">FTE vs demand</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEADCOUNT BY DIVISION -->
+  <section class="kk-section kk-section--tint">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Structure</div>
+      <h2>Workforce by division</h2>
+      <p class="kk-lead">Headcount against budget across the three service lines and corporate support.</p>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead>
+            <tr><th>Division</th><th class="kk-num">Current</th><th class="kk-num">Budget</th>
+                <th class="kk-num">Vacancies</th><th class="kk-num">Indigenous</th><th class="kk-num">FIFO</th><th>Fill</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Industrial Services</td><td class="kk-num">182</td><td class="kk-num">200</td>
+              <td class="kk-num"><span class="kk-badge kk-badge--amber">18</span></td><td class="kk-num">34%</td><td class="kk-num">71%</td>
+              <td><div class="wf-bar amber"><span style="width:91%"></span></div></td></tr>
+            <tr><td>Environmental Services</td><td class="kk-num">96</td><td class="kk-num">105</td>
+              <td class="kk-num"><span class="kk-badge kk-badge--amber">9</span></td><td class="kk-num">41%</td><td class="kk-num">58%</td>
+              <td><div class="wf-bar amber"><span style="width:91%"></span></div></td></tr>
+            <tr><td>Recruitment &amp; Labour Hire</td><td class="kk-num">58</td><td class="kk-num">60</td>
+              <td class="kk-num"><span class="kk-badge kk-badge--green">2</span></td><td class="kk-num">29%</td><td class="kk-num">22%</td>
+              <td><div class="wf-bar green"><span style="width:97%"></span></div></td></tr>
+            <tr><td>Corporate &amp; Support</td><td class="kk-num">44</td><td class="kk-num">46</td>
+              <td class="kk-num"><span class="kk-badge kk-badge--green">2</span></td><td class="kk-num">25%</td><td class="kk-num">5%</td>
+              <td><div class="wf-bar green"><span style="width:96%"></span></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="kk-demo-note" style="margin-top:14px">Employment mix: 214 Permanent · 92 Casual · 74 Labour Hire.</p>
+    </div>
+  </section>
+
+  <!-- DEMAND VS SUPPLY -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Forecasting</div>
+      <h2>Workforce demand vs confirmed supply — FY26</h2>
+      <p class="kk-lead">Forecast FTE demand from the sales pipeline against confirmed available crew. Negative gaps drive recruitment &amp; labour-hire mobilisation.</p>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead>
+            <tr><th>Quarter</th><th class="kk-num">Demand</th><th class="kk-num">Supply</th><th class="kk-num">Gap</th><th>Coverage</th><th>Key driver</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>FY26 Q1</td><td class="kk-num">372</td><td class="kk-num">357</td><td class="kk-num"><span class="kk-badge kk-badge--amber">-15</span></td>
+              <td><div class="wf-bar amber"><span style="width:96%"></span></div></td><td>Rio Tinto shutdown ramp-up</td></tr>
+            <tr><td>FY26 Q2</td><td class="kk-num">410</td><td class="kk-num">368</td><td class="kk-num"><span class="kk-badge kk-badge--red">-42</span></td>
+              <td><div class="wf-bar red"><span style="width:90%"></span></div></td><td>BHP environmental rehab award</td></tr>
+            <tr><td>FY26 Q3</td><td class="kk-num">438</td><td class="kk-num">395</td><td class="kk-num"><span class="kk-badge kk-badge--red">-43</span></td>
+              <td><div class="wf-bar red"><span style="width:90%"></span></div></td><td>Peak dry-season civil works</td></tr>
+            <tr><td>FY26 Q4</td><td class="kk-num">401</td><td class="kk-num">399</td><td class="kk-num"><span class="kk-badge kk-badge--green">-2</span></td>
+              <td><div class="wf-bar green"><span style="width:99%"></span></div></td><td>Wet-season demobilisation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS & CERTS -->
+  <section class="kk-section kk-section--tint">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Compliance</div>
+      <h2>Skills &amp; certification register</h2>
+      <p class="kk-lead">High-risk tickets required for mining &amp; environmental work. Amber = renewals due within 90 days.</p>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead>
+            <tr><th>Certification</th><th class="kk-num">Held</th><th class="kk-num">Required</th><th>Compliance</th><th class="kk-num">Expiring 90d</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>White Card (Construction)</td><td class="kk-num">356</td><td class="kk-num">380</td><td><div class="wf-bar green"><span style="width:94%"></span></div></td><td class="kk-num">0</td></tr>
+            <tr><td>Working at Heights</td><td class="kk-num">131</td><td class="kk-num">140</td><td><div class="wf-bar green"><span style="width:94%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">9</span></td></tr>
+            <tr><td>HR Truck Licence</td><td class="kk-num">148</td><td class="kk-num">160</td><td><div class="wf-bar green"><span style="width:93%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">11</span></td></tr>
+            <tr><td>4WD Operation</td><td class="kk-num">168</td><td class="kk-num">185</td><td><div class="wf-bar green"><span style="width:91%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">7</span></td></tr>
+            <tr><td>First Aid / LVR</td><td class="kk-num">210</td><td class="kk-num">240</td><td><div class="wf-bar amber"><span style="width:88%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">22</span></td></tr>
+            <tr><td>Confined Space Entry</td><td class="kk-num">102</td><td class="kk-num">120</td><td><div class="wf-bar amber"><span style="width:85%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">14</span></td></tr>
+            <tr><td>Standard 11 (Surface Mining)</td><td class="kk-num">88</td><td class="kk-num">110</td><td><div class="wf-bar amber"><span style="width:80%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">6</span></td></tr>
+            <tr><td>Dogging / Rigging</td><td class="kk-num">44</td><td class="kk-num">55</td><td><div class="wf-bar amber"><span style="width:80%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">3</span></td></tr>
+            <tr><td>Traffic Management</td><td class="kk-num">61</td><td class="kk-num">80</td><td><div class="wf-bar red"><span style="width:76%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">4</span></td></tr>
+            <tr><td>Elevated Work Platform</td><td class="kk-num">52</td><td class="kk-num">70</td><td><div class="wf-bar red"><span style="width:74%"></span></div></td><td class="kk-num"><span class="kk-badge kk-badge--amber">5</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECRUITMENT PIPELINE -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Recruitment &amp; Labour Hire</div>
+      <h2>Hiring pipeline</h2>
+      <div class="kk-grid kk-grid--2">
+        <div>
+          <h3>Candidate funnel</h3>
+          <div class="wf-funnel">
+            <div class="row"><span class="lbl">Applied</span><div class="track"><div class="fill" style="width:100%">693</div></div></div>
+            <div class="row"><span class="lbl">Screened</span><div class="track"><div class="fill" style="width:44%">305</div></div></div>
+            <div class="row"><span class="lbl">Shortlisted</span><div class="track"><div class="fill" style="width:31%">215</div></div></div>
+            <div class="row"><span class="lbl">Interviewed</span><div class="track"><div class="fill" style="width:21%">148</div></div></div>
+            <div class="row"><span class="lbl">Offer</span><div class="track"><div class="fill" style="width:12%">86</div></div></div>
+            <div class="row"><span class="lbl">Placed</span><div class="track"><div class="fill" style="width:9%">61</div></div></div>
+          </div>
+        </div>
+        <div>
+          <h3>Open roles</h3>
+          <div class="kk-table-wrap">
+            <table class="kk-table" style="min-width:0">
+              <thead><tr><th>Role</th><th class="kk-num">Open</th><th class="kk-num">Shortlist</th><th class="kk-num">Days</th></tr></thead>
+              <tbody>
+                <tr><td>Labour Hire Pool (casual)</td><td class="kk-num">40</td><td class="kk-num">120</td><td class="kk-num"><span class="kk-badge kk-badge--green">12</span></td></tr>
+                <tr><td>Trade Assistant</td><td class="kk-num">24</td><td class="kk-num">41</td><td class="kk-num"><span class="kk-badge kk-badge--green">28</span></td></tr>
+                <tr><td>Plant Operator</td><td class="kk-num">15</td><td class="kk-num">27</td><td class="kk-num"><span class="kk-badge kk-badge--amber">31</span></td></tr>
+                <tr><td>Environmental Technician</td><td class="kk-num">9</td><td class="kk-num">18</td><td class="kk-num"><span class="kk-badge kk-badge--amber">35</span></td></tr>
+                <tr><td>HSE Advisor</td><td class="kk-num">4</td><td class="kk-num">9</td><td class="kk-num"><span class="kk-badge kk-badge--red">44</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIGENOUS EMPLOYMENT / RISE -->
+  <section class="kk-section kk-section--dark">
+    <div class="kk-container">
+      <div class="kk-eyebrow" style="color:var(--kk-gold)">Empower · RISE value</div>
+      <h2>Indigenous employment &amp; community</h2>
+      <p class="kk-lead">As a 100% Aboriginal female-owned business, growing Indigenous participation and local
+        Pilbara employment is core to our mandate — not a side program.</p>
+      <div class="kk-grid kk-grid--4" style="margin:8px 0 28px">
+        <div class="kk-stat"><div class="kk-stat__label">Indigenous headcount</div><div class="kk-stat__value">141</div><div class="kk-stat__delta up">▲ from 118 · target 175</div></div>
+        <div class="kk-stat"><div class="kk-stat__label">Local Pilbara hires FY25</div><div class="kk-stat__value">79</div><div class="kk-stat__delta up">▲ from 64 · target 100</div></div>
+        <div class="kk-stat"><div class="kk-stat__label">12-mth retention</div><div class="kk-stat__value">79%</div><div class="kk-stat__delta up">▲ from 74% · target 85%</div></div>
+        <div class="kk-stat"><div class="kk-stat__label">Active traineeships</div><div class="kk-stat__value">19</div><div class="kk-stat__delta up">▲ from 12 · target 28</div></div>
+      </div>
+      <div class="kk-grid kk-grid--4">
+        <div class="kk-card"><div class="kk-card__icon">🪃</div><h3>Pilbara Local Employment Pathway</h3><p class="kk-card__meta">Community hiring — Karratha · Port Hedland · Newman. 42 participants.</p></div>
+        <div class="kk-card"><div class="kk-card__icon">🎓</div><h3>School-based Traineeships</h3><p class="kk-card__meta">Yr 11–12 trades &amp; environmental streams. 19 active.</p></div>
+        <div class="kk-card"><div class="kk-card__icon">⛑️</div><h3>Women in Resources</h3><p class="kk-card__meta">Female participation in plant &amp; trades. 27 participants.</p></div>
+        <div class="kk-card"><div class="kk-card__icon">📈</div><h3>Supervisor Ready</h3><p class="kk-card__meta">Indigenous leadership development. 11 in program.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPLOYEE REGISTER SAMPLE -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Data model · <code>employee</code> (EMP-###)</div>
+      <h2>Employee register — sample</h2>
+      <p class="kk-lead">Representative extract of the workforce master. The full synthetic set and schema live in the
+        repo: <code>/data/workforce/employees.json</code>.</p>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Service line</th><th>Home base</th><th>Status</th><th>Indigenous</th></tr></thead>
+          <tbody>
+            <tr><td>EMP-001</td><td>Shanaya Dann</td><td>Trade Assistant</td><td>Industrial</td><td>Pilbara - Karratha</td><td><span class="kk-badge kk-badge--orange">On Job</span></td><td>—</td></tr>
+            <tr><td>EMP-002</td><td>Dwayne Cameron</td><td>Plant Operator</td><td>Industrial</td><td>Pilbara - Newman</td><td><span class="kk-badge kk-badge--green">Available</span></td><td>—</td></tr>
+            <tr><td>EMP-003</td><td>Ellery Smith</td><td>Boilermaker</td><td>Industrial</td><td>Pilbara - Tom Price</td><td><span class="kk-badge kk-badge--navy">Leave</span></td><td>✔</td></tr>
+            <tr><td>EMP-004</td><td>Kirra Bennell</td><td>Rigger / Dogger</td><td>Industrial</td><td>Pilbara - Karratha</td><td><span class="kk-badge kk-badge--orange">On Job</span></td><td>—</td></tr>
+            <tr><td>EMP-006</td><td>Jack Isaacs</td><td>HD Diesel Fitter</td><td>Industrial</td><td>Pilbara - Newman</td><td><span class="kk-badge kk-badge--orange">On Job</span></td><td>✔</td></tr>
+            <tr><td>EMP-007</td><td>Kiara Winmar</td><td>Industrial Supervisor</td><td>Industrial</td><td>Pilbara - Karratha</td><td><span class="kk-badge kk-badge--orange">On Job</span></td><td>✔</td></tr>
+            <tr><td>EMP-009</td><td>Talia Roberts</td><td>Environmental Technician</td><td>Environmental</td><td>Pilbara - Karratha</td><td><span class="kk-badge kk-badge--navy">Leave</span></td><td>✔</td></tr>
+            <tr><td>EMP-010</td><td>Kalarni Ninyette</td><td>Rehabilitation Officer</td><td>Environmental</td><td>Pilbara - Newman</td><td><span class="kk-badge kk-badge--orange">On Job</span></td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CALENDAR -->
+  <section class="kk-section kk-section--tint">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Shared data model · <code>job</code> (JOB-####)</div>
+      <h2>Booking calendar — assets + workforce</h2>
+      <p class="kk-lead">The calendar is the join between the three domains: a won <strong>SALE</strong> (Sales) becomes a
+        <strong>JOB</strong> that books <strong>assets</strong> (Assets) and <strong>employees</strong> (Workforce)
+        over a date range. A resource can't be double-booked on overlapping dates.</p>
+      <div id="calendar-mount">
+        <p class="kk-demo-note">Live bookings are being wired to Sales' <code>SALE-####</code> ids and Assets' <code>KK-</code> tags — populating shortly.</p>
       </div>
     </div>
   </section>

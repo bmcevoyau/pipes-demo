@@ -1,0 +1,155 @@
+/* ============================================================
+   KingKira Group — Shared Brand Kit
+   Owner: cindy (Work Force Planning agent) for the ppz demo
+   Palette is an APPROXIMATION of kingkira.com.au earth tones —
+   swap the hex values below if exact brand colours are confirmed.
+   All text/background pairs checked for WCAG AA contrast.
+   ============================================================ */
+
+:root {
+  /* Core earth-tone palette (Pilbara / ochre) */
+  --kk-terracotta: #A63A1E;   /* primary — Pilbara red */
+  --kk-terracotta-dk: #7E2B14;
+  --kk-ochre: #D99A2B;        /* accent / gold */
+  --kk-charcoal: #241A15;     /* warm near-black — text & nav */
+  --kk-sand: #F6F0E8;         /* page background — paper */
+  --kk-sand-dk: #EAE0D2;
+  --kk-sage: #5B7355;         /* Environmental green */
+  --kk-spinifex: #8A8B4A;     /* muted olive */
+  --kk-white: #ffffff;
+  --kk-line: #d9ccb9;
+
+  --kk-max: 1120px;
+  --kk-radius: 10px;
+  --kk-shadow: 0 2px 10px rgba(36,26,21,.08);
+  --kk-shadow-lg: 0 8px 28px rgba(36,26,21,.14);
+  --kk-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --kk-sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--kk-sans);
+  color: var(--kk-charcoal);
+  background: var(--kk-sand);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { font-family: var(--kk-serif); line-height: 1.2; margin: 0 0 .5em; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+a { color: var(--kk-terracotta-dk); }
+
+.kk-wrap { max-width: var(--kk-max); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Header / Nav ---------- */
+.kk-header {
+  background: var(--kk-charcoal);
+  color: var(--kk-sand);
+  position: sticky; top: 0; z-index: 50;
+  box-shadow: var(--kk-shadow);
+}
+.kk-header .kk-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 66px; gap: 16px; flex-wrap: wrap;
+}
+.kk-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--kk-sand); }
+.kk-brand-mark {
+  width: 38px; height: 38px; border-radius: 8px; flex: 0 0 auto;
+  background: linear-gradient(135deg, var(--kk-terracotta), var(--kk-ochre));
+  display: grid; place-items: center; font-family: var(--kk-serif);
+  font-weight: 700; color: #fff; font-size: 1.1rem;
+}
+.kk-brand-name { font-family: var(--kk-serif); font-size: 1.2rem; font-weight: 700; letter-spacing: .3px; }
+.kk-brand-sub { display: block; font-family: var(--kk-sans); font-size: .68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--kk-ochre); }
+.kk-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.kk-nav a {
+  color: var(--kk-sand); text-decoration: none; padding: 8px 14px;
+  border-radius: 6px; font-size: .95rem; font-weight: 500;
+}
+.kk-nav a:hover, .kk-nav a[aria-current="page"] { background: rgba(255,255,255,.12); color: #fff; }
+.kk-nav a[aria-current="page"] { box-shadow: inset 0 -2px 0 var(--kk-ochre); }
+
+/* ---------- Hero ---------- */
+.kk-hero {
+  background:
+    linear-gradient(rgba(36,26,21,.62), rgba(36,26,21,.72)),
+    linear-gradient(135deg, var(--kk-terracotta), var(--kk-terracotta-dk) 60%, var(--kk-charcoal));
+  color: var(--kk-sand);
+  padding: 72px 0;
+}
+.kk-hero h1 { color: #fff; max-width: 16ch; }
+.kk-hero p { font-size: 1.15rem; max-width: 60ch; color: #f3e8db; }
+.kk-tagline { color: var(--kk-ochre); font-weight: 600; letter-spacing: .5px; }
+
+/* ---------- Buttons ---------- */
+.kk-btn {
+  display: inline-block; background: var(--kk-ochre); color: var(--kk-charcoal);
+  padding: 11px 22px; border-radius: 8px; text-decoration: none; font-weight: 600;
+  border: none; cursor: pointer; transition: transform .06s ease, filter .15s ease;
+}
+.kk-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.kk-btn.kk-btn-ghost { background: transparent; color: var(--kk-sand); box-shadow: inset 0 0 0 1.5px var(--kk-ochre); }
+
+/* ---------- Sections & Cards ---------- */
+.kk-section { padding: 56px 0; }
+.kk-eyebrow { text-transform: uppercase; letter-spacing: 2px; font-size: .78rem; color: var(--kk-terracotta); font-weight: 700; }
+.kk-grid { display: grid; gap: 20px; }
+.kk-grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.kk-grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+.kk-card {
+  background: var(--kk-white); border: 1px solid var(--kk-line);
+  border-radius: var(--kk-radius); padding: 22px; box-shadow: var(--kk-shadow);
+}
+.kk-card h3 { color: var(--kk-terracotta-dk); }
+.kk-card--accent { border-top: 4px solid var(--kk-ochre); }
+
+/* ---------- Stat tiles ---------- */
+.kk-stat { background: var(--kk-white); border: 1px solid var(--kk-line); border-radius: var(--kk-radius); padding: 20px; box-shadow: var(--kk-shadow); }
+.kk-stat .kk-num { font-family: var(--kk-serif); font-size: 2.2rem; font-weight: 700; color: var(--kk-terracotta); line-height: 1; }
+.kk-stat .kk-lbl { font-size: .85rem; color: #6a5b50; margin-top: 6px; }
+
+/* ---------- Tables ---------- */
+.kk-table-wrap { overflow-x: auto; border-radius: var(--kk-radius); box-shadow: var(--kk-shadow); border: 1px solid var(--kk-line); }
+table.kk-table { width: 100%; border-collapse: collapse; background: var(--kk-white); font-size: .93rem; }
+.kk-table th, .kk-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--kk-sand-dk); }
+.kk-table thead th { background: var(--kk-charcoal); color: var(--kk-sand); font-weight: 600; position: sticky; top: 0; }
+.kk-table tbody tr:nth-child(even) { background: #faf6ef; }
+.kk-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* simple inline bar for tables/metrics */
+.kk-bar { background: var(--kk-sand-dk); border-radius: 6px; height: 10px; overflow: hidden; min-width: 80px; }
+.kk-bar > span { display: block; height: 100%; background: var(--kk-ochre); }
+.kk-bar.good > span { background: var(--kk-sage); }
+.kk-bar.warn > span { background: var(--kk-terracotta); }
+
+/* pill / tag */
+.kk-pill { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600; }
+.kk-pill.ok { background: #e3ecdf; color: #3c5236; }
+.kk-pill.mid { background: #f7eccf; color: #6f5410; }
+.kk-pill.low { background: #f6dfd7; color: #7E2B14; }
+
+/* ---------- Footer ---------- */
+.kk-footer { background: var(--kk-charcoal); color: #cdbfae; padding: 40px 0 28px; margin-top: 40px; font-size: .9rem; }
+.kk-footer a { color: var(--kk-ochre); }
+.kk-footer .kk-foot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 24px; }
+.kk-footer h4 { color: var(--kk-sand); font-family: var(--kk-sans); text-transform: uppercase; letter-spacing: 1px; font-size: .8rem; }
+.kk-foot-bottom { border-top: 1px solid rgba(255,255,255,.12); margin-top: 26px; padding-top: 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.kk-ack { font-style: italic; max-width: 70ch; }
+
+/* ---------- Utilities ---------- */
+.kk-muted { color: #6a5b50; }
+.kk-center { text-align: center; }
+.kk-mt { margin-top: 28px; }
+.kk-demo-note { background: #fbf3e2; border: 1px dashed var(--kk-ochre); border-radius: 8px; padding: 10px 14px; font-size: .85rem; color: #6f5410; }
+
+@media (max-width: 640px) {
+  .kk-hero { padding: 52px 0; }
+  .kk-header .kk-wrap { min-height: 58px; }
+}

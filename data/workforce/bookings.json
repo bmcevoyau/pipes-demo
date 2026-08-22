@@ -1,0 +1,61 @@
+{
+  "note": "The shared booking CALENDAR (job entity, JOB-####). Owned by Workforce Planning; read by all. Each JOB delivers a WON sale (sale_id) by booking real assets (KK- ids, Bob) + crew (EMP-### , Cindy) over a date window. crew_required vs crew_booked exposes the resourcing shortfall that drives the recruitment pipeline. Synthetic.",
+  "generated": "2026-08-22",
+  "jobs": [
+    {
+      "job_id": "JOB-2001", "sale_id": "SALE-1001", "customer_id": "CUST-001",
+      "service_line": "Industrial", "site": "Pilbara - Newman",
+      "start_date": "2026-08-01", "end_date": "2027-06-30", "status": "In Progress",
+      "asset_ids": ["KK-HT-001", "KK-LV-040", "KK-WS-080"],
+      "employee_ids": ["EMP-006", "EMP-026", "EMP-003", "EMP-007"],
+      "crew_required": 7, "crew_booked": 4, "shortfall": 3,
+      "scope": "Fixed-plant maintenance & shutdown support"
+    },
+    {
+      "job_id": "JOB-2007", "sale_id": "SALE-1007", "customer_id": "CUST-001",
+      "service_line": "Environmental", "site": "Pilbara - Tom Price",
+      "start_date": "2026-09-01", "end_date": "2026-12-20", "status": "Scheduled",
+      "asset_ids": ["KK-EX-010", "KK-DZ-020", "KK-TR-100", "KK-LV-041", "KK-PU-060"],
+      "employee_ids": ["EMP-022", "EMP-042", "EMP-004", "EMP-024", "EMP-009", "EMP-029"],
+      "crew_required": 8, "crew_booked": 6, "shortfall": 2,
+      "scope": "Legacy plant decommissioning & land rehabilitation"
+    },
+    {
+      "job_id": "JOB-2008", "sale_id": "SALE-1008", "customer_id": "CUST-007",
+      "service_line": "Industrial", "site": "Pilbara - Karratha",
+      "start_date": "2026-07-15", "end_date": "2027-07-14", "status": "In Progress",
+      "asset_ids": ["KK-LV-042", "KK-GS-050", "KK-WS-081", "KK-AC-090"],
+      "employee_ids": ["EMP-046", "EMP-023", "EMP-043", "EMP-018"],
+      "crew_required": 11, "crew_booked": 4, "shortfall": 7,
+      "scope": "Maintenance panel — incl. Auto Electrician role not held (recruiting)"
+    },
+    {
+      "job_id": "JOB-2009", "sale_id": "SALE-1009", "customer_id": "CUST-008",
+      "service_line": "Industrial", "site": "Pilbara - Newman",
+      "start_date": "2026-08-10", "end_date": "2026-11-30", "status": "In Progress",
+      "asset_ids": ["KK-DZ-021", "KK-WC-030", "KK-EX-011", "KK-LV-040"],
+      "employee_ids": ["EMP-002", "EMP-047"],
+      "crew_required": 8, "crew_booked": 2, "shortfall": 6,
+      "scope": "Bulk earthworks & haulage — heavy operator shortfall"
+    },
+    {
+      "job_id": "JOB-2010", "sale_id": "SALE-1010", "customer_id": "CUST-004",
+      "service_line": "Recruitment", "site": "Pilbara - Newman",
+      "start_date": "2026-06-01", "end_date": "2027-05-31", "status": "In Progress",
+      "asset_ids": ["KK-AC-091", "KK-LV-041"],
+      "employee_ids": ["EMP-001", "EMP-021", "EMP-041"],
+      "crew_required": 16, "crew_booked": 3, "shortfall": 13,
+      "scope": "FIFO labour-hire panel — primary labour-hire mobilisation driver"
+    },
+    {
+      "job_id": "JOB-2011", "sale_id": "SALE-1011", "customer_id": "CUST-002",
+      "service_line": "Environmental", "site": "Pilbara - Karratha",
+      "start_date": "2026-08-20", "end_date": "2026-10-31", "status": "In Progress",
+      "asset_ids": ["KK-PU-061", "KK-EM-070", "KK-LV-042"],
+      "employee_ids": ["EMP-013"],
+      "crew_required": 4, "crew_booked": 1, "shortfall": 3,
+      "scope": "Dust, air & water monitoring — env technician shortfall"
+    }
+  ],
+  "totals": { "jobs": 6, "crew_required": 54, "crew_booked": 20, "shortfall": 34 }
+}
