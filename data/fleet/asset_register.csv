@@ -1,0 +1,26 @@
+asset_id,category,make_model,year,site,status,acquisition_cost_aud,current_book_value_aud,utilisation_pct_ytd,last_service_date,next_service_due,condition,owner_division
+KK-HT-001,Haul Truck,Caterpillar 777G,2019,Pilbara - Newman,Operational,3850000,2695000,88,2026-07-28,2026-09-25,Good,Industrial Services
+KK-HT-002,Haul Truck,Caterpillar 777G,2020,Pilbara - Newman,Operational,3910000,2932000,91,2026-08-05,2026-10-04,Good,Industrial Services
+KK-HT-003,Haul Truck,Komatsu HD785-7,2018,Pilbara - Tom Price,Maintenance,3620000,2172000,63,2026-08-12,2026-08-26,Fair,Industrial Services
+KK-EX-010,Excavator,Caterpillar 349,2021,Pilbara - Newman,Operational,1180000,944000,79,2026-08-01,2026-09-30,Good,Industrial Services
+KK-EX-011,Excavator,Komatsu PC490LC-11,2020,Pilbara - Karratha,Operational,1240000,868000,84,2026-07-19,2026-09-17,Good,Industrial Services
+KK-EX-012,Excavator,Hitachi ZX350,2017,Pilbara - Tom Price,Standby,980000,441000,41,2026-06-30,2026-08-29,Fair,Environmental Services
+KK-DZ-020,Dozer,Caterpillar D8T,2019,Pilbara - Newman,Operational,1650000,1155000,72,2026-08-09,2026-10-08,Good,Industrial Services
+KK-DZ-021,Dozer,Komatsu D65PX-18,2022,Pilbara - Karratha,Operational,1720000,1462000,86,2026-08-14,2026-10-13,Excellent,Industrial Services
+KK-WC-030,Water Cart,Caterpillar 740 (30kL),2018,Pilbara - Tom Price,Operational,720000,432000,68,2026-07-25,2026-09-23,Good,Environmental Services
+KK-WC-031,Water Cart,Volvo A40G (30kL),2021,Pilbara - Newman,Operational,760000,608000,81,2026-08-03,2026-10-02,Good,Environmental Services
+KK-LV-040,Light Vehicle,Toyota LandCruiser 79 Series,2023,Perth - Applecross,Operational,89000,71200,58,2026-08-10,2026-11-08,Excellent,Corporate
+KK-LV-041,Light Vehicle,Toyota HiLux SR5,2022,Pilbara - Karratha,Operational,72000,50400,74,2026-07-30,2026-10-28,Good,Recruitment & Labour Hire
+KK-LV-042,Light Vehicle,Toyota LandCruiser 79 Series,2021,Pilbara - Newman,Operational,84000,50400,77,2026-08-06,2026-11-04,Good,Industrial Services
+KK-GS-050,Generator,Cummins C550 D5 (550kVA),2020,Pilbara - Newman,Operational,145000,101500,90,2026-08-02,2026-10-01,Good,Industrial Services
+KK-GS-051,Generator,Cummins C275 D5 (275kVA),2019,Pilbara - Tom Price,Standby,92000,55200,37,2026-06-25,2026-08-24,Fair,Industrial Services
+KK-PU-060,Dewatering Pump,Sykes CP150i,2021,Pilbara - Karratha,Operational,68000,47600,82,2026-08-11,2026-10-10,Good,Environmental Services
+KK-PU-061,Dewatering Pump,Xylem Godwin HL160M,2022,Pilbara - Newman,Operational,74000,59200,79,2026-08-08,2026-10-07,Good,Environmental Services
+KK-EM-070,Environmental Monitor,Aeroqual AQS1 Air Quality Station,2023,Pilbara - Newman,Operational,42000,33600,64,2026-07-22,2026-10-20,Excellent,Environmental Services
+KK-EM-071,Environmental Monitor,Thermo Scientific pDR-1500 Dust,2022,Pilbara - Tom Price,Operational,18000,12600,59,2026-08-04,2026-11-02,Good,Environmental Services
+KK-WS-080,Workshop Equipment,Lincoln Electric Welder Bank,2020,Perth - Applecross,Operational,56000,39200,70,2026-07-18,2026-10-16,Good,Industrial Services
+KK-WS-081,Workshop Equipment,Enerpac Hydraulic Press 50T,2019,Perth - Applecross,Operational,34000,20400,52,2026-06-28,2026-09-26,Fair,Industrial Services
+KK-AC-090,Site Accommodation,Modular Ablution Block x4,2021,Pilbara - Newman,Operational,210000,147000,95,2026-07-27,2026-10-25,Good,Recruitment & Labour Hire
+KK-AC-091,Site Accommodation,Modular Office Complex,2020,Pilbara - Karratha,Operational,320000,224000,88,2026-08-07,2026-11-05,Good,Recruitment & Labour Hire
+KK-TR-100,Trailer,Float Trailer 4-Row Extendable,2018,Pilbara - Newman,Operational,285000,171000,66,2026-07-24,2026-09-22,Good,Industrial Services
+KK-TR-101,Trailer,Side Tipper Road Train Set,2022,Pilbara - Tom Price,Maintenance,340000,272000,71,2026-08-13,2026-08-27,Good,Industrial Services
