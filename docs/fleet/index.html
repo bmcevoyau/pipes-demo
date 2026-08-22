@@ -129,6 +129,16 @@
     </div>
   </section>
 
+  <!-- Current enquiry asset plans -->
+  <section class="kk-section kk-section--tint">
+    <div class="kk-container">
+      <h2 class="kk-mt0">Enquiry asset plans</h2>
+      <p class="kk-lead">Live asset response to open enquiries — owned units earmarked plus the
+        hire/procurement list where owned fleet is committed. Updated when a new job comes in.</p>
+      <div id="planWrap"></div>
+    </div>
+  </section>
+
   <!-- Cross-domain note -->
   <section class="kk-section">
     <div class="kk-container">
@@ -152,16 +162,18 @@
     // Workforce's calendar — optional; page still renders if it's absent.
     fetch('../data/workforce/bookings.json').then(r => r.ok ? r.json() : {jobs:[]}).catch(() => ({jobs:[]})),
     // Sales pipeline — optional; drives the asset-readiness view.
-    fetch('../data/sales/sales.json').then(r => r.ok ? r.json() : {sales:[]}).catch(() => ({sales:[]}))
+    fetch('../data/sales/sales.json').then(r => r.ok ? r.json() : {sales:[]}).catch(() => ({sales:[]})),
+    // Assets' own response plans to open enquiries — optional.
+    fetch('../data/fleet/asset_plan.json').then(r => r.ok ? r.json() : {plans:[]}).catch(() => ({plans:[]}))
   ])
-    .then(([assets, bookings, salesDoc]) => render(assets, (bookings && bookings.jobs) || [], (bookings && bookings.pooled_asset_ids) || [], (salesDoc && salesDoc.sales) || []))
+    .then(([assets, bookings, salesDoc, planDoc]) => render(assets, (bookings && bookings.jobs) || [], (bookings && bookings.pooled_asset_ids) || [], (salesDoc && salesDoc.sales) || [], (planDoc && planDoc.plans) || []))
     .catch(err => {
       document.getElementById('kpi').innerHTML =
         '<p class="kk-demo-note">Asset data could not be loaded ('+err.message+'). '+
         'On a live GitHub Pages URL this loads from <code>../data/fleet/asset_register.json</code>.</p>';
     });
 
-  function render(ASSETS, JOBS, POOLED, SALES){
+  function render(ASSETS, JOBS, POOLED, SALES, PLANS){
     const fmt = n => '$' + n.toLocaleString('en-AU');
     const fmtM = n => '$' + (n/1e6).toFixed(1) + 'M';
     const badge = s => ({Operational:'green', Maintenance:'amber', Standby:'navy'}[s] || 'navy');
@@ -331,6 +343,29 @@
         `<td><strong>${s.sale_id}</strong></td>`+
         `<td>${s.description||''}<div class="kk-card__meta">${s.service_line||''} · $${(s.value_aud||0).toLocaleString('en-AU')}</div></td>`+
         `<td class="kk-card__meta">${win}</td><td>${needs}</td><td>${cov}</td>`));
+    });
+
+    // ---- Enquiry asset plans (Assets' response, per Ben's keep-current rule) ----
+    const planWrap = document.getElementById('planWrap');
+    if(!PLANS.length){
+      planWrap.innerHTML = '<p class="kk-muted">No open enquiry asset plans.</p>';
+    }
+    PLANS.forEach(p => {
+      const w = p.window || {};
+      const alloc = (p.allocated_owned||[]).map(a => `<span class="kk-badge kk-badge--green">${a.asset_id}</span>`).join(' ') || '—';
+      const pool  = (p.from_pool||[]).map(x => `<span class="kk-badge kk-badge--navy">${x.category} pool</span>`).join(' ');
+      const hire  = (p.hire_required||[]).map(h => `<span class="kk-badge kk-badge--red">${h.category}: ${h.qty} ${h.unit} — ${h.item}</span>`).join(' ') || '—';
+      const card = el('div','kk-card');
+      card.style.borderLeft = '4px solid var(--kk-orange)';
+      card.style.marginBottom = '16px';
+      card.innerHTML =
+        `<div class="kk-flex kk-between"><h3 class="kk-mt0">${p.sale_id} · ${p.enquiry||''}</h3>`+
+        `<span class="kk-badge kk-badge--amber">${p.stage||''}</span></div>`+
+        `<p class="kk-card__meta">${p.site||''} · ${w.start||'?'} → ${w.end||'?'}${w.status?' ('+w.status+')':''} · crew ~${p.crew_anticipated||'?'}</p>`+
+        `<p style="margin:.5em 0"><strong>Allocated (owned):</strong> ${alloc} ${pool}</p>`+
+        `<p style="margin:.5em 0"><strong>Hire required:</strong> ${hire}</p>`+
+        `<p class="kk-mb0 kk-muted">${p.summary||''}</p>`;
+      planWrap.appendChild(card);
     });
   }
   </script>
