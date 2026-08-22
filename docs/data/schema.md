@@ -94,6 +94,19 @@ site (home base), status (`Available`|`On Job`|`Leave`), employment_type
 A resource (asset or employee) should not appear on two jobs with overlapping
 date ranges — that is the scheduling constraint the calendar enforces.
 
+**Pooled assets (exemption).** Some assets are a *shared pool* rather than
+dedicated plant — e.g. light vehicles that any crew draws from. Their overlapping
+bookings are **intentional, not clashes**. The calendar file (`bookings.json`)
+declares them in a top-level array:
+
+```json
+"pooled_asset_ids": ["KK-LV-040", "KK-LV-041", "KK-LV-042"]
+```
+
+Pooled `asset_id`s are **exempt** from the no-overlap rule above. Consumers
+(dashboards, validator) should treat an overlap on a pooled asset as informational
+("Pooled / shared"), and only flag overlaps on *dedicated* assets as conflicts.
+
 ---
 
 ## 4. Relationships
