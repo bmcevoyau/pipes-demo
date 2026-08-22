@@ -30,7 +30,10 @@ ID_RE = {
     "employee": re.compile(r"^EMP-\d{3}$"),
     "job":      re.compile(r"^JOB-\d{4}$"),
 }
-SERVICE_LINES = {"Industrial", "Environmental", "Recruitment"}
+SERVICE_LINES = {"Industrial", "Environmental", "Recruitment"}  # billable delivery lines (sale + job)
+# Employees may also be overhead/shared-services staff (schema §2): 'Corporate'
+# is valid for the employee entity only, never for a sale or job.
+EMPLOYEE_SERVICE_LINES = SERVICE_LINES | {"Corporate"}
 SITES = {"Perth - Applecross", "Pilbara - Newman", "Pilbara - Tom Price", "Pilbara - Karratha"}
 ASSET_STATUS = {"Operational", "Maintenance", "Standby"}
 JOB_STATUS = {"Scheduled", "In Progress", "Completed", "Cancelled"}
@@ -126,7 +129,7 @@ def main():
 
     # --- Employee enums ---
     for e in employees:
-        if e.get("service_line") not in SERVICE_LINES:
+        if e.get("service_line") not in EMPLOYEE_SERVICE_LINES:
             warn(f"employee {e.get('employee_id')}: service_line {e.get('service_line')!r} unexpected")
         if e.get("site") not in SITES:
             warn(f"employee {e.get('employee_id')}: site {e.get('site')!r} not in known sites")
