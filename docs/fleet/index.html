@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Assets — KingKira Group</title>
-  <meta name="description" content="KingKira Group asset, plant &amp; equipment register (demo).">
+  <meta name="description" content="KingKira Group asset, plant &amp; equipment register (demo): utilisation, maintenance &amp; asset recovery.">
   <link rel="stylesheet" href="../assets/css/brand.css">
 </head>
 <body>
@@ -14,23 +14,563 @@
     <div class="kk-container">
       <div class="kk-eyebrow" style="color:var(--kk-gold)">Operations portal</div>
       <h1>Assets</h1>
-      <p class="kk-lead">Fleet, plant &amp; equipment register &middot; utilisation &middot; maintenance &middot; asset recovery.</p>
+      <p class="kk-lead">Fleet, plant &amp; equipment register &middot; utilisation &middot; maintenance &middot; asset recovery — resourcing KingKira's Industrial &amp; Environmental service delivery across the Pilbara.</p>
     </div>
   </section>
 
+  <!-- KPI row -->
   <section class="kk-section">
     <div class="kk-container">
-      <div class="kk-card" style="border-left:4px solid var(--kk-orange)">
-        <h3 class="kk-mt0">🚧 Section owner: <span style="color:var(--kk-orange-deep)">bob (Assets)</span></h3>
-        <p>This is a scaffolded stub with the shared header, footer and brand kit wired up.
-           Bob — replace this content with the asset register, utilisation and maintenance views.
-           Data lives in <code>/data/fleet/</code>; assets key on <code>KK-&lt;cat&gt;-###</code>.</p>
-        <p class="kk-mb0"><span class="kk-demo-note">See <code>/docs/README.md</code> for the class list &amp; include.js contract.</span></p>
+      <div class="kk-grid kk-grid--4" id="kpi"></div>
+    </div>
+  </section>
+
+  <!-- Fleet composition -->
+  <section class="kk-section kk-section--tint">
+    <div class="kk-container">
+      <div class="kk-flex kk-between">
+        <h2 class="kk-mt0">Fleet composition</h2>
+        <span class="kk-demo-note">Synthetic data &middot; keys on <code>KK-&lt;cat&gt;-###</code></span>
+      </div>
+      <p class="kk-lead">Book value and average utilisation by asset category.</p>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead><tr><th>Category</th><th class="kk-num">Units</th><th class="kk-num">Book value (AUD)</th><th class="kk-num">Avg util. YTD</th></tr></thead>
+          <tbody id="compRows"></tbody>
+        </table>
       </div>
     </div>
   </section>
 
+  <!-- Asset register -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <div class="kk-flex kk-between">
+        <h2 class="kk-mt0">Asset register</h2>
+        <div class="kk-pill-row" id="filters"></div>
+      </div>
+      <p class="kk-lead">Full plant &amp; equipment register. Assets are booked to service jobs via the shared calendar (<code>job.asset_ids[]</code>).</p>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead><tr>
+            <th>Asset ID</th><th>Category</th><th>Make / model</th><th>Site</th>
+            <th>Status</th><th class="kk-num">Util. YTD</th><th class="kk-num">Book value</th><th>Next service</th>
+          </tr></thead>
+          <tbody id="regRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Maintenance -->
+  <section class="kk-section kk-section--tint">
+    <div class="kk-container">
+      <h2 class="kk-mt0">Maintenance schedule</h2>
+      <p class="kk-lead">Assets due for service within 30 days (today: 22 Aug 2026). Proactive servicing protects uptime and safety.</p>
+      <div class="kk-grid kk-grid--2">
+        <div class="kk-table-wrap">
+          <table class="kk-table">
+            <thead><tr><th>Asset</th><th>Make / model</th><th>Next service</th><th>Status</th></tr></thead>
+            <tbody id="maintRows"></tbody>
+          </table>
+        </div>
+        <div class="kk-card" style="border-left:4px solid var(--kk-orange)">
+          <h3 class="kk-mt0">Assets by site</h3>
+          <div class="kk-table-wrap" style="border:none">
+            <table class="kk-table" style="min-width:auto">
+              <tbody id="siteRows"></tbody>
+            </table>
+          </div>
+          <p class="kk-card__meta kk-mb0">Head office: Applecross, Perth. Operating sites across the Pilbara.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cross-domain note -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <div class="kk-card kk-card--link" style="border-left:4px solid var(--kk-navy)">
+        <h3 class="kk-mt0">How Assets connect</h3>
+        <p class="kk-mb0">Every asset here is a <strong>delivery resource</strong>. When Sales wins a service order
+        (<code>SALE-####</code>), Workforce Planning schedules a <code>JOB-####</code> on the shared calendar that
+        books specific assets (<code>asset_ids[]</code>) and crew (<code>employee_ids[]</code>) for a date range.
+        See the <a href="https://github.com/bmcevoyau/pipes-demo/blob/main/data/schema.md">shared data model</a>.</p>
+      </div>
+      <p class="kk-demo-note" style="margin-top:16px">Demo site — all figures synthetic. Not an official KingKira Group asset.</p>
+    </div>
+  </section>
+
   <div id="site-footer"></div>
+
+  <script>
+  const ASSETS =
+[
+  {
+    "asset_id": "KK-HT-001",
+    "category": "Haul Truck",
+    "make_model": "Caterpillar 777G",
+    "year": 2019,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 3850000,
+    "current_book_value_aud": 2695000,
+    "utilisation_pct_ytd": 88,
+    "last_service_date": "2026-07-28",
+    "next_service_due": "2026-09-25",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-HT-002",
+    "category": "Haul Truck",
+    "make_model": "Caterpillar 777G",
+    "year": 2020,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 3910000,
+    "current_book_value_aud": 2932000,
+    "utilisation_pct_ytd": 91,
+    "last_service_date": "2026-08-05",
+    "next_service_due": "2026-10-04",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-HT-003",
+    "category": "Haul Truck",
+    "make_model": "Komatsu HD785-7",
+    "year": 2018,
+    "site": "Pilbara - Tom Price",
+    "status": "Maintenance",
+    "acquisition_cost_aud": 3620000,
+    "current_book_value_aud": 2172000,
+    "utilisation_pct_ytd": 63,
+    "last_service_date": "2026-08-12",
+    "next_service_due": "2026-08-26",
+    "condition": "Fair",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-EX-010",
+    "category": "Excavator",
+    "make_model": "Caterpillar 349",
+    "year": 2021,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 1180000,
+    "current_book_value_aud": 944000,
+    "utilisation_pct_ytd": 79,
+    "last_service_date": "2026-08-01",
+    "next_service_due": "2026-09-30",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-EX-011",
+    "category": "Excavator",
+    "make_model": "Komatsu PC490LC-11",
+    "year": 2020,
+    "site": "Pilbara - Karratha",
+    "status": "Operational",
+    "acquisition_cost_aud": 1240000,
+    "current_book_value_aud": 868000,
+    "utilisation_pct_ytd": 84,
+    "last_service_date": "2026-07-19",
+    "next_service_due": "2026-09-17",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-EX-012",
+    "category": "Excavator",
+    "make_model": "Hitachi ZX350",
+    "year": 2017,
+    "site": "Pilbara - Tom Price",
+    "status": "Standby",
+    "acquisition_cost_aud": 980000,
+    "current_book_value_aud": 441000,
+    "utilisation_pct_ytd": 41,
+    "last_service_date": "2026-06-30",
+    "next_service_due": "2026-08-29",
+    "condition": "Fair",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-DZ-020",
+    "category": "Dozer",
+    "make_model": "Caterpillar D8T",
+    "year": 2019,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 1650000,
+    "current_book_value_aud": 1155000,
+    "utilisation_pct_ytd": 72,
+    "last_service_date": "2026-08-09",
+    "next_service_due": "2026-10-08",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-DZ-021",
+    "category": "Dozer",
+    "make_model": "Komatsu D65PX-18",
+    "year": 2022,
+    "site": "Pilbara - Karratha",
+    "status": "Operational",
+    "acquisition_cost_aud": 1720000,
+    "current_book_value_aud": 1462000,
+    "utilisation_pct_ytd": 86,
+    "last_service_date": "2026-08-14",
+    "next_service_due": "2026-10-13",
+    "condition": "Excellent",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-WC-030",
+    "category": "Water Cart",
+    "make_model": "Caterpillar 740 (30kL)",
+    "year": 2018,
+    "site": "Pilbara - Tom Price",
+    "status": "Operational",
+    "acquisition_cost_aud": 720000,
+    "current_book_value_aud": 432000,
+    "utilisation_pct_ytd": 68,
+    "last_service_date": "2026-07-25",
+    "next_service_due": "2026-09-23",
+    "condition": "Good",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-WC-031",
+    "category": "Water Cart",
+    "make_model": "Volvo A40G (30kL)",
+    "year": 2021,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 760000,
+    "current_book_value_aud": 608000,
+    "utilisation_pct_ytd": 81,
+    "last_service_date": "2026-08-03",
+    "next_service_due": "2026-10-02",
+    "condition": "Good",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-LV-040",
+    "category": "Light Vehicle",
+    "make_model": "Toyota LandCruiser 79 Series",
+    "year": 2023,
+    "site": "Perth - Applecross",
+    "status": "Operational",
+    "acquisition_cost_aud": 89000,
+    "current_book_value_aud": 71200,
+    "utilisation_pct_ytd": 58,
+    "last_service_date": "2026-08-10",
+    "next_service_due": "2026-11-08",
+    "condition": "Excellent",
+    "owner_division": "Corporate"
+  },
+  {
+    "asset_id": "KK-LV-041",
+    "category": "Light Vehicle",
+    "make_model": "Toyota HiLux SR5",
+    "year": 2022,
+    "site": "Pilbara - Karratha",
+    "status": "Operational",
+    "acquisition_cost_aud": 72000,
+    "current_book_value_aud": 50400,
+    "utilisation_pct_ytd": 74,
+    "last_service_date": "2026-07-30",
+    "next_service_due": "2026-10-28",
+    "condition": "Good",
+    "owner_division": "Recruitment & Labour Hire"
+  },
+  {
+    "asset_id": "KK-LV-042",
+    "category": "Light Vehicle",
+    "make_model": "Toyota LandCruiser 79 Series",
+    "year": 2021,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 84000,
+    "current_book_value_aud": 50400,
+    "utilisation_pct_ytd": 77,
+    "last_service_date": "2026-08-06",
+    "next_service_due": "2026-11-04",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-GS-050",
+    "category": "Generator",
+    "make_model": "Cummins C550 D5 (550kVA)",
+    "year": 2020,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 145000,
+    "current_book_value_aud": 101500,
+    "utilisation_pct_ytd": 90,
+    "last_service_date": "2026-08-02",
+    "next_service_due": "2026-10-01",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-GS-051",
+    "category": "Generator",
+    "make_model": "Cummins C275 D5 (275kVA)",
+    "year": 2019,
+    "site": "Pilbara - Tom Price",
+    "status": "Standby",
+    "acquisition_cost_aud": 92000,
+    "current_book_value_aud": 55200,
+    "utilisation_pct_ytd": 37,
+    "last_service_date": "2026-06-25",
+    "next_service_due": "2026-08-24",
+    "condition": "Fair",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-PU-060",
+    "category": "Dewatering Pump",
+    "make_model": "Sykes CP150i",
+    "year": 2021,
+    "site": "Pilbara - Karratha",
+    "status": "Operational",
+    "acquisition_cost_aud": 68000,
+    "current_book_value_aud": 47600,
+    "utilisation_pct_ytd": 82,
+    "last_service_date": "2026-08-11",
+    "next_service_due": "2026-10-10",
+    "condition": "Good",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-PU-061",
+    "category": "Dewatering Pump",
+    "make_model": "Xylem Godwin HL160M",
+    "year": 2022,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 74000,
+    "current_book_value_aud": 59200,
+    "utilisation_pct_ytd": 79,
+    "last_service_date": "2026-08-08",
+    "next_service_due": "2026-10-07",
+    "condition": "Good",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-EM-070",
+    "category": "Environmental Monitor",
+    "make_model": "Aeroqual AQS1 Air Quality Station",
+    "year": 2023,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 42000,
+    "current_book_value_aud": 33600,
+    "utilisation_pct_ytd": 64,
+    "last_service_date": "2026-07-22",
+    "next_service_due": "2026-10-20",
+    "condition": "Excellent",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-EM-071",
+    "category": "Environmental Monitor",
+    "make_model": "Thermo Scientific pDR-1500 Dust",
+    "year": 2022,
+    "site": "Pilbara - Tom Price",
+    "status": "Operational",
+    "acquisition_cost_aud": 18000,
+    "current_book_value_aud": 12600,
+    "utilisation_pct_ytd": 59,
+    "last_service_date": "2026-08-04",
+    "next_service_due": "2026-11-02",
+    "condition": "Good",
+    "owner_division": "Environmental Services"
+  },
+  {
+    "asset_id": "KK-WS-080",
+    "category": "Workshop Equipment",
+    "make_model": "Lincoln Electric Welder Bank",
+    "year": 2020,
+    "site": "Perth - Applecross",
+    "status": "Operational",
+    "acquisition_cost_aud": 56000,
+    "current_book_value_aud": 39200,
+    "utilisation_pct_ytd": 70,
+    "last_service_date": "2026-07-18",
+    "next_service_due": "2026-10-16",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-WS-081",
+    "category": "Workshop Equipment",
+    "make_model": "Enerpac Hydraulic Press 50T",
+    "year": 2019,
+    "site": "Perth - Applecross",
+    "status": "Operational",
+    "acquisition_cost_aud": 34000,
+    "current_book_value_aud": 20400,
+    "utilisation_pct_ytd": 52,
+    "last_service_date": "2026-06-28",
+    "next_service_due": "2026-09-26",
+    "condition": "Fair",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-AC-090",
+    "category": "Site Accommodation",
+    "make_model": "Modular Ablution Block x4",
+    "year": 2021,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 210000,
+    "current_book_value_aud": 147000,
+    "utilisation_pct_ytd": 95,
+    "last_service_date": "2026-07-27",
+    "next_service_due": "2026-10-25",
+    "condition": "Good",
+    "owner_division": "Recruitment & Labour Hire"
+  },
+  {
+    "asset_id": "KK-AC-091",
+    "category": "Site Accommodation",
+    "make_model": "Modular Office Complex",
+    "year": 2020,
+    "site": "Pilbara - Karratha",
+    "status": "Operational",
+    "acquisition_cost_aud": 320000,
+    "current_book_value_aud": 224000,
+    "utilisation_pct_ytd": 88,
+    "last_service_date": "2026-08-07",
+    "next_service_due": "2026-11-05",
+    "condition": "Good",
+    "owner_division": "Recruitment & Labour Hire"
+  },
+  {
+    "asset_id": "KK-TR-100",
+    "category": "Trailer",
+    "make_model": "Float Trailer 4-Row Extendable",
+    "year": 2018,
+    "site": "Pilbara - Newman",
+    "status": "Operational",
+    "acquisition_cost_aud": 285000,
+    "current_book_value_aud": 171000,
+    "utilisation_pct_ytd": 66,
+    "last_service_date": "2026-07-24",
+    "next_service_due": "2026-09-22",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  },
+  {
+    "asset_id": "KK-TR-101",
+    "category": "Trailer",
+    "make_model": "Side Tipper Road Train Set",
+    "year": 2022,
+    "site": "Pilbara - Tom Price",
+    "status": "Maintenance",
+    "acquisition_cost_aud": 340000,
+    "current_book_value_aud": 272000,
+    "utilisation_pct_ytd": 71,
+    "last_service_date": "2026-08-13",
+    "next_service_due": "2026-08-27",
+    "condition": "Good",
+    "owner_division": "Industrial Services"
+  }
+]
+;
+  // ---- helpers ----
+  const fmt = n => '$' + n.toLocaleString('en-AU');
+  const fmtM = n => '$' + (n/1e6).toFixed(1) + 'M';
+  const badge = s => ({Operational:'green', Maintenance:'amber', Standby:'navy'}[s] || 'navy');
+  const CATCODE = {'Haul Truck':'HT','Excavator':'EX','Dozer':'DZ','Water Cart':'WC','Light Vehicle':'LV','Generator':'GS','Dewatering Pump':'PU','Environmental Monitor':'EM','Workshop Equipment':'WS','Site Accommodation':'AC','Trailer':'TR'};
+  const TODAY = new Date('2026-08-22');
+  const el = (t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;};
+
+  // ---- KPIs ----
+  const total = ASSETS.length;
+  const book = ASSETS.reduce((a,r)=>a+r.current_book_value_aud,0);
+  const acq  = ASSETS.reduce((a,r)=>a+r.acquisition_cost_aud,0);
+  const util = Math.round(ASSETS.reduce((a,r)=>a+r.utilisation_pct_ytd,0)/total*10)/10;
+  const oper = ASSETS.filter(r=>r.status==='Operational').length;
+  const dueSoon = ASSETS.filter(r=>{const d=new Date(r.next_service_due); return (d-TODAY)/864e5 <= 30;}).length;
+  const kpis = [
+    {l:'Assets under management', v:total, d:'11 categories', up:true},
+    {l:'Fleet book value', v:fmtM(book), d:fmtM(acq)+' acquisition cost'},
+    {l:'Avg utilisation YTD', v:util+'%', d:'target 70%', up:util>=70},
+    {l:'Operational', v:oper+' / '+total, d:dueSoon+' due service ≤30d', up:true},
+  ];
+  const kpiWrap = document.getElementById('kpi');
+  kpis.forEach(k=>{
+    const c = el('div','kk-stat kk-stat--accent');
+    c.appendChild(el('div','kk-stat__label',k.l));
+    c.appendChild(el('div','kk-stat__value',k.v));
+    c.appendChild(el('div','kk-stat__delta '+(k.up===undefined?'':k.up?'up':'down'), k.d));
+    kpiWrap.appendChild(c);
+  });
+
+  // ---- Composition by category ----
+  const byCat = {};
+  ASSETS.forEach(r=>{(byCat[r.category] ||= {n:0,bv:0,u:0}); byCat[r.category].n++; byCat[r.category].bv+=r.current_book_value_aud; byCat[r.category].u+=r.utilisation_pct_ytd;});
+  const compRows = document.getElementById('compRows');
+  Object.entries(byCat).sort((a,b)=>b[1].bv-a[1].bv).forEach(([cat,d])=>{
+    const tr = el('tr');
+    tr.innerHTML = `<td><span class="kk-badge kk-badge--orange">${CATCODE[cat]||''}</span> ${cat}</td>`+
+      `<td class="kk-num">${d.n}</td><td class="kk-num">${fmt(d.bv)}</td><td class="kk-num">${Math.round(d.u/d.n)}%</td>`;
+    compRows.appendChild(tr);
+  });
+
+  // ---- Register (with status filter) ----
+  const regRows = document.getElementById('regRows');
+  function renderReg(filter){
+    regRows.innerHTML='';
+    ASSETS.filter(r=>!filter||r.status===filter).forEach(r=>{
+      const tr = el('tr');
+      tr.innerHTML =
+        `<td><strong>${r.asset_id}</strong></td>`+
+        `<td>${r.category}</td>`+
+        `<td>${r.make_model}<div class="kk-card__meta">${r.year} · ${r.owner_division}</div></td>`+
+        `<td>${r.site}</td>`+
+        `<td><span class="kk-badge kk-badge--${badge(r.status)}">${r.status}</span></td>`+
+        `<td class="kk-num">${r.utilisation_pct_ytd}%</td>`+
+        `<td class="kk-num">${fmt(r.current_book_value_aud)}</td>`+
+        `<td>${r.next_service_due}</td>`;
+      regRows.appendChild(tr);
+    });
+  }
+  // filter pills
+  const filters = document.getElementById('filters');
+  ['All','Operational','Maintenance','Standby'].forEach((s,i)=>{
+    const b = el('button','kk-badge kk-badge--'+(i===0?'orange':badge(s)), s);
+    b.style.cursor='pointer'; b.style.border='1px solid transparent';
+    b.onclick=()=>renderReg(s==='All'?null:s);
+    filters.appendChild(b);
+  });
+  renderReg(null);
+
+  // ---- Maintenance due ≤30d ----
+  const maintRows = document.getElementById('maintRows');
+  ASSETS.filter(r=>{const d=new Date(r.next_service_due); return (d-TODAY)/864e5 <= 30;})
+    .sort((a,b)=>new Date(a.next_service_due)-new Date(b.next_service_due))
+    .forEach(r=>{
+      const tr = el('tr');
+      tr.innerHTML = `<td><strong>${r.asset_id}</strong></td><td>${r.make_model}</td>`+
+        `<td>${r.next_service_due}</td><td><span class="kk-badge kk-badge--${badge(r.status)}">${r.status}</span></td>`;
+      maintRows.appendChild(tr);
+    });
+
+  // ---- By site ----
+  const bySite = {};
+  ASSETS.forEach(r=>bySite[r.site]=(bySite[r.site]||0)+1);
+  const siteRows = document.getElementById('siteRows');
+  Object.entries(bySite).sort((a,b)=>b[1]-a[1]).forEach(([s,n])=>{
+    siteRows.appendChild(el('tr',null,`<td>${s}</td><td class="kk-num"><strong>${n}</strong></td>`));
+  });
+  </script>
   <script src="../assets/js/include.js" data-active="fleet"></script>
 </body>
 </html>
