@@ -4,32 +4,243 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sales — KingKira Group</title>
-  <meta name="description" content="KingKira Group sales: customers, pipeline &amp; service orders (demo).">
+  <meta name="description" content="KingKira Group sales dashboard (demo): customers, pipeline &amp; won service orders.">
   <link rel="stylesheet" href="../assets/css/brand.css">
+  <style>
+    /* page-local helpers built on the shared kit */
+    .bar { height: 12px; border-radius: 6px; background: var(--kk-navy); }
+    .barrow { display:grid; grid-template-columns: 130px 1fr 120px; gap:12px; align-items:center; margin:10px 0; }
+    .barrow .lbl { font-weight:600; color:var(--kk-slate); }
+    .barrow .val { text-align:right; font-variant-numeric:tabular-nums; font-weight:700; color:var(--kk-navy); }
+    .track { background:var(--kk-line); border-radius:6px; overflow:hidden; }
+    .sl-Industrial{ background:var(--kk-slate); }
+    .sl-Environmental{ background:var(--kk-green); }
+    .sl-Recruitment{ background:var(--kk-orange); }
+    .needs { font-size:.82rem; color:var(--kk-muted); }
+    .needs code{ background:var(--kk-cream); padding:1px 5px; border-radius:5px; }
+  </style>
 </head>
 <body>
   <div id="site-header"></div>
 
   <section class="kk-hero" style="padding:56px 0">
     <div class="kk-container">
-      <div class="kk-eyebrow" style="color:var(--kk-gold)">Operations portal</div>
-      <h1>Sales</h1>
-      <p class="kk-lead">Customers &middot; opportunity pipeline &middot; won service orders across Industrial, Environmental &amp; Recruitment.</p>
+      <div class="kk-eyebrow" style="color:var(--kk-gold)">Operations portal &middot; Sales</div>
+      <h1>Sales Dashboard</h1>
+      <p class="kk-lead">Customers, live pipeline and won service orders across Industrial, Environmental &amp; Recruitment &mdash; each won deal flows to Assets &amp; Workforce through the shared booking calendar.</p>
+      <p style="margin-top:14px"><span class="kk-demo-note">Synthetic data &middot; rendered from <code>/data/sales/*.json</code> (schema v0.1)</span></p>
     </div>
   </section>
 
-  <section class="kk-section">
+  <!-- KPIs -->
+  <section class="kk-section" style="padding-top:40px">
     <div class="kk-container">
-      <div class="kk-card" style="border-left:4px solid var(--kk-orange)">
-        <h3 class="kk-mt0">Section owner: <span style="color:var(--kk-orange-deep)">alice (Sales)</span></h3>
-        <p>Full sales dashboard loading shortly — customers, live pipeline and won service orders,
-           wired to the shared data model (<code>CUST-###</code>, <code>SALE-####</code>).</p>
-        <p class="kk-mb0"><span class="kk-demo-note">Data: <code>/data/sales/</code></span></p>
+      <div class="kk-grid kk-grid--4" id="kpis"></div>
+    </div>
+  </section>
+
+  <!-- Pipeline by stage + service line mix -->
+  <section class="kk-section kk-section--tint" style="padding-top:40px">
+    <div class="kk-container">
+      <div class="kk-grid kk-grid--2">
+        <div class="kk-card">
+          <h3 class="kk-mt0">Open pipeline by stage</h3>
+          <p class="kk-muted" style="margin-top:-4px">Weighted &amp; unweighted value of active opportunities.</p>
+          <div id="byStage"></div>
+        </div>
+        <div class="kk-card">
+          <h3 class="kk-mt0">Won value by service line</h3>
+          <p class="kk-muted" style="margin-top:-4px">Where our secured work sits.</p>
+          <div id="byLine"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Won service orders -->
+  <section class="kk-section" style="padding-top:48px">
+    <div class="kk-container">
+      <div class="kk-flex kk-between">
+        <div>
+          <div class="kk-eyebrow">Secured work → delivery</div>
+          <h2 class="kk-mt0">Won service orders</h2>
+        </div>
+      </div>
+      <p class="kk-lead">Each order carries the assets &amp; crew it needs — Workforce turns these into calendar bookings against real asset IDs and employees.</p>
+      <div class="kk-table-wrap" style="margin-top:18px">
+        <table class="kk-table">
+          <thead><tr>
+            <th>Sale</th><th>Customer</th><th>Service line</th><th class="kk-num">Value</th><th>Window</th><th>Resource needs</th>
+          </tr></thead>
+          <tbody id="wonRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full pipeline -->
+  <section class="kk-section kk-section--tint" style="padding-top:48px">
+    <div class="kk-container">
+      <h2 class="kk-mt0">Full pipeline</h2>
+      <div class="kk-table-wrap" style="margin-top:14px">
+        <table class="kk-table">
+          <thead><tr>
+            <th>Sale</th><th>Customer</th><th>Line</th><th class="kk-num">Value</th><th class="kk-num">Prob.</th><th>Stage</th>
+          </tr></thead>
+          <tbody id="pipeRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customers -->
+  <section class="kk-section" style="padding-top:48px">
+    <div class="kk-container">
+      <h2 class="kk-mt0">Customer accounts</h2>
+      <div class="kk-table-wrap" style="margin-top:14px">
+        <table class="kk-table">
+          <thead><tr>
+            <th>ID</th><th>Customer</th><th>Industry</th><th>Site</th><th>Account manager</th><th class="kk-num">Since</th>
+          </tr></thead>
+          <tbody id="custRows"></tbody>
+        </table>
       </div>
     </div>
   </section>
 
   <div id="site-footer"></div>
   <script src="../assets/js/include.js" data-active="sales"></script>
+
+  <!-- ===== Data + rendering ===== -->
+  <script>
+  // Inline snapshot = reliable fallback so the board demo never shows a blank page.
+  // Progressive enhancement below re-fetches the live JSON if it's served under /docs/data.
+  const SNAPSHOT = {
+    customers: [
+      {customer_id:"CUST-001",name:"Pilbara Iron Alliance",industry:"Iron Ore",site:"Pilbara - Newman",account_manager:"Danielle Warra",since:"2021-03-15"},
+      {customer_id:"CUST-002",name:"Hedland Energy Partners",industry:"Gas",site:"Pilbara - Karratha",account_manager:"Marcus Vance",since:"2022-06-01"},
+      {customer_id:"CUST-003",name:"Gascoyne Minerals Ltd",industry:"Rare Earths",site:"Pilbara - Tom Price",account_manager:"Priya Sundara",since:"2024-01-20"},
+      {customer_id:"CUST-004",name:"Fortescue Ranges Operations",industry:"Iron Ore",site:"Pilbara - Tom Price",account_manager:"Danielle Warra",since:"2020-02-10"},
+      {customer_id:"CUST-005",name:"Northwest Shelf Utilities",industry:"Power & Water",site:"Pilbara - Karratha",account_manager:"Marcus Vance",since:"2023-09-05"},
+      {customer_id:"CUST-006",name:"Goldfields Processing Co",industry:"Gold",site:"Pilbara - Newman",account_manager:"Priya Sundara",since:"2026-05-18"},
+      {customer_id:"CUST-007",name:"Karratha Gas Terminal JV",industry:"Gas",site:"Pilbara - Karratha",account_manager:"Marcus Vance",since:"2021-11-30"},
+      {customer_id:"CUST-008",name:"Newman Civil Infrastructure",industry:"Infrastructure",site:"Pilbara - Newman",account_manager:"Liam O'Doherty",since:"2023-04-12"}
+    ],
+    sales: [
+      {sale_id:"SALE-1001",customer_id:"CUST-001",service_line:"Industrial",description:"FY27 routine maintenance renewal — Newman haul fleet",value_aud:4200000,stage:"Won",probability:1.00,start_date:"2026-08-01",end_date:"2027-06-30",resource_needs:{asset_categories:["HT","LV","WS"],employee_roles:[{role:"HD Fitter",count:4},{role:"Boilermaker",count:2},{role:"Site Supervisor",count:1}]}},
+      {sale_id:"SALE-1002",customer_id:"CUST-004",service_line:"Industrial",description:"Shutdown turnaround — Tom Price processing plant",value_aud:2400000,stage:"Negotiation",probability:0.75,start_date:"2026-09-15",end_date:"2026-10-05",resource_needs:{asset_categories:["EX","WC","GS","LV"],employee_roles:[{role:"Boilermaker",count:6},{role:"Rigger",count:3},{role:"Scaffolder",count:4},{role:"HSE Advisor",count:1}]}},
+      {sale_id:"SALE-1003",customer_id:"CUST-002",service_line:"Industrial",description:"Rotating equipment reliability program — Karratha",value_aud:1650000,stage:"Proposal",probability:0.55,start_date:"2026-10-01",end_date:"2027-03-31",resource_needs:{asset_categories:["LV","GS"],employee_roles:[{role:"HD Fitter",count:3},{role:"Auto Electrician",count:2},{role:"Site Supervisor",count:1}]}},
+      {sale_id:"SALE-1004",customer_id:"CUST-003",service_line:"Environmental",description:"Tailings rehabilitation & waste recycling",value_aud:780000,stage:"Proposal",probability:0.40,start_date:"2026-11-01",end_date:"2027-02-28",resource_needs:{asset_categories:["EX","WC","EM","LV"],employee_roles:[{role:"Environmental Scientist",count:2},{role:"Env Technician",count:3},{role:"Excavator Operator",count:2}]}},
+      {sale_id:"SALE-1005",customer_id:"CUST-006",service_line:"Environmental",description:"Environmental compliance audit + labour hire ramp",value_aud:1200000,stage:"Negotiation",probability:0.60,start_date:"2026-10-12",end_date:"2027-01-31",resource_needs:{asset_categories:["EM","LV"],employee_roles:[{role:"Environmental Scientist",count:2},{role:"Env Technician",count:4},{role:"Labourer",count:6}]}},
+      {sale_id:"SALE-1006",customer_id:"CUST-005",service_line:"Recruitment",description:"Planned outage support crew (labour hire)",value_aud:620000,stage:"Proposal",probability:0.60,start_date:"2026-09-25",end_date:"2026-10-20",resource_needs:{asset_categories:["LV","AC"],employee_roles:[{role:"Trades Assistant",count:8},{role:"Labourer",count:6},{role:"Site Supervisor",count:1}]}},
+      {sale_id:"SALE-1007",customer_id:"CUST-001",service_line:"Environmental",description:"Asset recovery & decommissioning — legacy plant",value_aud:1950000,stage:"Won",probability:1.00,start_date:"2026-09-01",end_date:"2026-12-20",resource_needs:{asset_categories:["EX","DZ","TR","LV","PU"],employee_roles:[{role:"Excavator Operator",count:2},{role:"Plant Operator",count:2},{role:"Rigger",count:2},{role:"Env Technician",count:2}]}},
+      {sale_id:"SALE-1008",customer_id:"CUST-007",service_line:"Industrial",description:"Fixed plant maintenance panel — gas terminal",value_aud:3100000,stage:"Won",probability:1.00,start_date:"2026-07-15",end_date:"2027-07-14",resource_needs:{asset_categories:["LV","GS","WS","AC"],employee_roles:[{role:"HD Fitter",count:5},{role:"Boilermaker",count:3},{role:"Auto Electrician",count:2},{role:"HSE Advisor",count:1}]}},
+      {sale_id:"SALE-1009",customer_id:"CUST-008",service_line:"Industrial",description:"Civil earthworks & haul road maintenance",value_aud:1450000,stage:"Won",probability:1.00,start_date:"2026-08-10",end_date:"2026-11-30",resource_needs:{asset_categories:["DZ","WC","EX","LV"],employee_roles:[{role:"Plant Operator",count:4},{role:"Haul Truck Operator",count:3},{role:"Site Supervisor",count:1}]}},
+      {sale_id:"SALE-1010",customer_id:"CUST-004",service_line:"Recruitment",description:"FIFO trades labour hire — sustaining capital",value_aud:2200000,stage:"Won",probability:1.00,start_date:"2026-06-01",end_date:"2027-05-31",resource_needs:{asset_categories:["AC","LV"],employee_roles:[{role:"Boilermaker",count:6},{role:"HD Fitter",count:6},{role:"Trades Assistant",count:4}]}},
+      {sale_id:"SALE-1011",customer_id:"CUST-002",service_line:"Environmental",description:"Produced water dewatering & monitoring",value_aud:540000,stage:"Won",probability:1.00,start_date:"2026-08-20",end_date:"2026-10-31",resource_needs:{asset_categories:["PU","EM","LV"],employee_roles:[{role:"Env Technician",count:3},{role:"Environmental Scientist",count:1}]}},
+      {sale_id:"SALE-1012",customer_id:"CUST-005",service_line:"Industrial",description:"Standby generator install & commissioning",value_aud:410000,stage:"Lost",probability:0.00,start_date:null,end_date:null,lost_reason:"Price — lost to incumbent contractor",resource_needs:{asset_categories:["GS","LV"],employee_roles:[{role:"Auto Electrician",count:2},{role:"HD Fitter",count:2}]}},
+      {sale_id:"SALE-1013",customer_id:"CUST-003",service_line:"Recruitment",description:"Exploration camp labour hire",value_aud:300000,stage:"Lost",probability:0.00,start_date:null,end_date:null,lost_reason:"Client deferred program",resource_needs:{asset_categories:["AC","LV"],employee_roles:[{role:"Labourer",count:10}]}},
+      {sale_id:"SALE-1014",customer_id:"CUST-006",service_line:"Industrial",description:"Crusher reline shutdown",value_aud:890000,stage:"Proposal",probability:0.45,start_date:"2027-01-10",end_date:"2027-01-24",resource_needs:{asset_categories:["EX","GS","LV","WS"],employee_roles:[{role:"Boilermaker",count:4},{role:"Rigger",count:2},{role:"Trades Assistant",count:3}]}}
+    ]
+  };
+
+  const fmt = n => '$' + Math.round(n).toLocaleString('en-AU');
+  const fmtM = n => '$' + (n/1e6).toFixed(2) + 'M';
+  const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+  function render(data) {
+    const custById = Object.fromEntries(data.customers.map(c => [c.customer_id, c]));
+    const sales = data.sales;
+    const won = sales.filter(s => s.stage === 'Won');
+    const open = sales.filter(s => s.stage === 'Proposal' || s.stage === 'Negotiation');
+    const lost = sales.filter(s => s.stage === 'Lost');
+
+    const wonValue = won.reduce((a,s)=>a+s.value_aud,0);
+    const openValue = open.reduce((a,s)=>a+s.value_aud,0);
+    const weighted = open.reduce((a,s)=>a+s.value_aud*(s.probability||0),0);
+    const decided = won.length + lost.length;
+    const winRate = decided ? Math.round(won.length/decided*100) : 0;
+
+    // KPIs
+    document.getElementById('kpis').innerHTML = [
+      ['Won (secured)', fmtM(wonValue), won.length+' service orders', 'up'],
+      ['Open pipeline', fmtM(openValue), open.length+' active opps', ''],
+      ['Weighted pipeline', fmtM(weighted), 'probability-adjusted', ''],
+      ['Win rate', winRate+'%', won.length+' won / '+lost.length+' lost', winRate>=50?'up':'down']
+    ].map(([l,v,d,dir]) =>
+      `<div class="kk-stat kk-stat--accent"><div class="kk-stat__label">${l}</div>
+        <div class="kk-stat__value">${v}</div>
+        <div class="kk-stat__delta ${dir}">${esc(d)}</div></div>`
+    ).join('');
+
+    // Pipeline by stage
+    const stages = ['Negotiation','Proposal'];
+    const maxStage = Math.max(...stages.map(st => open.filter(s=>s.stage===st).reduce((a,s)=>a+s.value_aud,0)), 1);
+    document.getElementById('byStage').innerHTML = stages.map(st => {
+      const v = open.filter(s=>s.stage===st).reduce((a,s)=>a+s.value_aud,0);
+      return `<div class="barrow"><span class="lbl">${st}</span>
+        <div class="track"><div class="bar" style="width:${Math.max(4,v/maxStage*100)}%"></div></div>
+        <span class="val">${fmtM(v)}</span></div>`;
+    }).join('');
+
+    // Won by service line
+    const lines = ['Industrial','Environmental','Recruitment'];
+    const maxLine = Math.max(...lines.map(l => won.filter(s=>s.service_line===l).reduce((a,s)=>a+s.value_aud,0)), 1);
+    document.getElementById('byLine').innerHTML = lines.map(l => {
+      const v = won.filter(s=>s.service_line===l).reduce((a,s)=>a+s.value_aud,0);
+      return `<div class="barrow"><span class="lbl">${l}</span>
+        <div class="track"><div class="bar sl-${l}" style="width:${Math.max(4,v/maxLine*100)}%"></div></div>
+        <span class="val">${fmtM(v)}</span></div>`;
+    }).join('');
+
+    // Won rows
+    const needStr = s => {
+      const a = s.resource_needs.asset_categories.map(c=>`<code>${c}</code>`).join(' ');
+      const r = s.resource_needs.employee_roles.map(x=>`${esc(x.role)}&times;${x.count}`).join(', ');
+      return `<div class="needs">${a}<br>${r}</div>`;
+    };
+    document.getElementById('wonRows').innerHTML = won.map(s =>
+      `<tr><td><strong>${s.sale_id}</strong></td>
+        <td>${esc((custById[s.customer_id]||{}).name||s.customer_id)}</td>
+        <td><span class="kk-badge badge-${s.service_line}">${s.service_line}</span></td>
+        <td class="kk-num">${fmt(s.value_aud)}</td>
+        <td>${s.start_date||''}<br><span class="kk-muted">→ ${s.end_date||''}</span></td>
+        <td>${needStr(s)}</td></tr>`
+    ).join('');
+
+    // Full pipeline
+    const badge = st => ({Won:'--green',Proposal:'--navy',Negotiation:'--amber',Lost:'--red'}[st]||'');
+    document.getElementById('pipeRows').innerHTML = sales
+      .slice().sort((a,b)=>b.value_aud-a.value_aud).map(s =>
+      `<tr><td><strong>${s.sale_id}</strong></td>
+        <td>${esc((custById[s.customer_id]||{}).name||s.customer_id)}</td>
+        <td>${s.service_line}</td>
+        <td class="kk-num">${fmt(s.value_aud)}</td>
+        <td class="kk-num">${Math.round((s.probability||0)*100)}%</td>
+        <td><span class="kk-badge kk-badge${badge(s.stage)}">${s.stage}</span></td></tr>`
+    ).join('');
+
+    // Customers
+    document.getElementById('custRows').innerHTML = data.customers.map(c =>
+      `<tr><td><strong>${c.customer_id}</strong></td>
+        <td>${esc(c.name)}</td><td>${esc(c.industry)}</td><td>${esc(c.site)}</td>
+        <td>${esc(c.account_manager)}</td><td class="kk-num">${c.since}</td></tr>`
+    ).join('');
+  }
+
+  // Render snapshot immediately, then try to upgrade to live data if served.
+  render(SNAPSHOT);
+  Promise.all([
+    fetch('../data/sales/customers.json').then(r=>r.ok?r.json():null).catch(()=>null),
+    fetch('../data/sales/sales.json').then(r=>r.ok?r.json():null).catch(()=>null)
+  ]).then(([c,s]) => {
+    if (c && s) render({ customers: c.customers||c, sales: s.sales||s });
+  });
+  </script>
+  <style>
+    .badge-Industrial{ background:var(--kk-slate); color:#fff; border-color:var(--kk-slate); }
+    .badge-Environmental{ background:rgba(101,188,123,.18); color:#2f7d47; border-color:rgba(101,188,123,.5); }
+    .badge-Recruitment{ background:var(--kk-orange); color:var(--kk-navy); border-color:var(--kk-orange); }
+  </style>
 </body>
 </html>
