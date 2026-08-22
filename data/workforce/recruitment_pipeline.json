@@ -1,0 +1,18 @@
+{
+  "note": "Active recruitment & labour-hire pipeline. Feeds the Recruitment & Labour Hire service line and internal vacancies. Synthetic.",
+  "pipeline": [
+    { "role": "Trade Assistant",          "service_line": "Industrial",    "openings": 24, "applicants": 186, "shortlisted": 41, "offers_out": 12, "avg_time_to_fill_days": 28 },
+    { "role": "Plant Operator",           "service_line": "Industrial",    "openings": 15, "applicants": 94,  "shortlisted": 27, "offers_out": 8,  "avg_time_to_fill_days": 31 },
+    { "role": "Environmental Technician", "service_line": "Environmental", "openings": 9,  "applicants": 63,  "shortlisted": 18, "offers_out": 5,  "avg_time_to_fill_days": 35 },
+    { "role": "HSE Advisor",              "service_line": "Corporate",     "openings": 4,  "applicants": 38,  "shortlisted": 9,  "offers_out": 3,  "avg_time_to_fill_days": 44 },
+    { "role": "Labour Hire Pool (casual)","service_line": "Recruitment",   "openings": 40, "applicants": 312, "shortlisted": 120,"offers_out": 58, "avg_time_to_fill_days": 12 }
+  ],
+  "stage_funnel": [
+    { "stage": "Applied",     "count": 693 },
+    { "stage": "Screened",    "count": 305 },
+    { "stage": "Shortlisted", "count": 215 },
+    { "stage": "Interviewed", "count": 148 },
+    { "stage": "Offer",       "count": 86 },
+    { "stage": "Placed",      "count": 61 }
+  ]
+}

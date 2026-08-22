@@ -1,0 +1,25 @@
+{
+  "as_at": "2026-08-22",
+  "note": "Synthetic data for the KingKira ppz demo. employees.json holds a 48-row representative sample; company-level totals below reflect the full workforce (~380 FTE).",
+  "kpis": {
+    "total_headcount": 380,
+    "budgeted_headcount": 411,
+    "open_vacancies": 31,
+    "indigenous_pct": 34,
+    "fifo_pct": 58,
+    "avg_time_to_fill_days": 29,
+    "rolling_12m_attrition_pct": 21,
+    "cert_compliance_pct": 89
+  },
+  "headcount_by_division": [
+    { "division": "Industrial Services",       "current": 182, "budgeted": 200, "vacancies": 18, "indigenous_pct": 34, "fifo_pct": 71 },
+    { "division": "Environmental Services",     "current": 96,  "budgeted": 105, "vacancies": 9,  "indigenous_pct": 41, "fifo_pct": 58 },
+    { "division": "Recruitment & Labour Hire",  "current": 58,  "budgeted": 60,  "vacancies": 2,  "indigenous_pct": 29, "fifo_pct": 22 },
+    { "division": "Corporate & Support",        "current": 44,  "budgeted": 46,  "vacancies": 2,  "indigenous_pct": 25, "fifo_pct": 5 }
+  ],
+  "headcount_by_employment_type": [
+    { "type": "Permanent",   "count": 214 },
+    { "type": "Casual",      "count": 92 },
+    { "type": "Labour Hire", "count": 74 }
+  ]
+}

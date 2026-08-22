@@ -1,0 +1,15 @@
+{
+  "note": "Certification / competency register and compliance. Codes used in employees.json map to 'code' below. Synthetic.",
+  "catalog": [
+    { "code": "HR",     "name": "HR Truck Licence",              "held": 148, "required": 160, "compliance_pct": 93, "expiring_90d": 11 },
+    { "code": "CSE",    "name": "Confined Space Entry",          "held": 102, "required": 120, "compliance_pct": 85, "expiring_90d": 14 },
+    { "code": "WHT",    "name": "Working at Heights",            "held": 131, "required": 140, "compliance_pct": 94, "expiring_90d": 9 },
+    { "code": "C11",    "name": "Standard 11 (Surface Mining)",  "held": 88,  "required": 110, "compliance_pct": 80, "expiring_90d": 6 },
+    { "code": "WCARD",  "name": "White Card (Construction)",     "held": 356, "required": 380, "compliance_pct": 94, "expiring_90d": 0 },
+    { "code": "DOGRIG", "name": "Dogging / Rigging",             "held": 44,  "required": 55,  "compliance_pct": 80, "expiring_90d": 3 },
+    { "code": "FA",     "name": "First Aid / LVR",               "held": 210, "required": 240, "compliance_pct": 88, "expiring_90d": 22 },
+    { "code": "4WD",    "name": "4WD Operation",                 "held": 168, "required": 185, "compliance_pct": 91, "expiring_90d": 7 },
+    { "code": "TM",     "name": "Traffic Management",            "held": 61,  "required": 80,  "compliance_pct": 76, "expiring_90d": 4 },
+    { "code": "EWP",    "name": "Elevated Work Platform",        "held": 52,  "required": 70,  "compliance_pct": 74, "expiring_90d": 5 }
+  ]
+}
