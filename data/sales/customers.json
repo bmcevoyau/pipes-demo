@@ -1,0 +1,19 @@
+{
+  "_meta": {
+    "note": "SYNTHETIC demo data — KingKira Group pipes-demo. Customer names are fictional; any resemblance to real companies is coincidental.",
+    "entity": "customer",
+    "owner": "alice (Sales)",
+    "schema": "/data/schema.md v0.1",
+    "generated": "2026-08-22"
+  },
+  "customers": [
+    { "customer_id": "CUST-001", "name": "Pilbara Iron Alliance",      "industry": "Iron Ore",       "site": "Pilbara - Newman",    "account_manager": "Danielle Warra",  "since": "2021-03-15" },
+    { "customer_id": "CUST-002", "name": "Hedland Energy Partners",     "industry": "Gas",            "site": "Pilbara - Karratha",  "account_manager": "Marcus Vance",    "since": "2022-06-01" },
+    { "customer_id": "CUST-003", "name": "Gascoyne Minerals Ltd",       "industry": "Rare Earths",    "site": "Pilbara - Tom Price", "account_manager": "Priya Sundara",   "since": "2024-01-20" },
+    { "customer_id": "CUST-004", "name": "Fortescue Ranges Operations", "industry": "Iron Ore",       "site": "Pilbara - Tom Price", "account_manager": "Danielle Warra",  "since": "2020-02-10" },
+    { "customer_id": "CUST-005", "name": "Northwest Shelf Utilities",   "industry": "Power & Water",  "site": "Pilbara - Karratha",  "account_manager": "Marcus Vance",    "since": "2023-09-05" },
+    { "customer_id": "CUST-006", "name": "Goldfields Processing Co",     "industry": "Gold",           "site": "Pilbara - Newman",    "account_manager": "Priya Sundara",   "since": "2026-05-18" },
+    { "customer_id": "CUST-007", "name": "Karratha Gas Terminal JV",    "industry": "Gas",            "site": "Pilbara - Karratha",  "account_manager": "Marcus Vance",    "since": "2021-11-30" },
+    { "customer_id": "CUST-008", "name": "Newman Civil Infrastructure", "industry": "Infrastructure", "site": "Pilbara - Newman",    "account_manager": "Liam O'Doherty",  "since": "2023-04-12" }
+  ]
+}

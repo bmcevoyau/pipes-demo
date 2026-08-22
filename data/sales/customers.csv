@@ -1,0 +1,9 @@
+customer_id,name,industry,site,account_manager,since
+CUST-001,Pilbara Iron Alliance,Iron Ore,Pilbara - Newman,Danielle Warra,2021-03-15
+CUST-002,Hedland Energy Partners,Gas,Pilbara - Karratha,Marcus Vance,2022-06-01
+CUST-003,Gascoyne Minerals Ltd,Rare Earths,Pilbara - Tom Price,Priya Sundara,2024-01-20
+CUST-004,Fortescue Ranges Operations,Iron Ore,Pilbara - Tom Price,Danielle Warra,2020-02-10
+CUST-005,Northwest Shelf Utilities,Power & Water,Pilbara - Karratha,Marcus Vance,2023-09-05
+CUST-006,Goldfields Processing Co,Gold,Pilbara - Newman,Priya Sundara,2026-05-18
+CUST-007,Karratha Gas Terminal JV,Gas,Pilbara - Karratha,Marcus Vance,2021-11-30
+CUST-008,Newman Civil Infrastructure,Infrastructure,Pilbara - Newman,Liam O'Doherty,2023-04-12

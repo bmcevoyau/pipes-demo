@@ -1,0 +1,15 @@
+sale_id,customer_id,service_line,description,value_aud,stage,probability,start_date,end_date,asset_categories,employee_roles
+SALE-1001,CUST-001,Industrial,FY27 routine maintenance renewal — Newman haul fleet,4200000,Won,1.00,2026-08-01,2027-06-30,HT|LV|WS,HD Fitter:4|Boilermaker:2|Site Supervisor:1
+SALE-1002,CUST-004,Industrial,Shutdown turnaround — Tom Price processing plant,2400000,Negotiation,0.75,2026-09-15,2026-10-05,EX|WC|GS|LV,Boilermaker:6|Rigger:3|Scaffolder:4|HSE Advisor:1
+SALE-1003,CUST-002,Industrial,Rotating equipment reliability program — Karratha,1650000,Proposal,0.55,2026-10-01,2027-03-31,LV|GS,HD Fitter:3|Auto Electrician:2|Site Supervisor:1
+SALE-1004,CUST-003,Environmental,Tailings rehabilitation & waste recycling,780000,Proposal,0.40,2026-11-01,2027-02-28,EX|WC|EM|LV,Environmental Scientist:2|Env Technician:3|Excavator Operator:2
+SALE-1005,CUST-006,Environmental,Environmental compliance audit + labour hire ramp,1200000,Negotiation,0.60,2026-10-12,2027-01-31,EM|LV,Environmental Scientist:2|Env Technician:4|Labourer:6
+SALE-1006,CUST-005,Recruitment,Planned outage support crew (labour hire),620000,Proposal,0.60,2026-09-25,2026-10-20,LV|AC,Trades Assistant:8|Labourer:6|Site Supervisor:1
+SALE-1007,CUST-001,Environmental,Asset recovery & decommissioning — legacy plant,1950000,Won,1.00,2026-09-01,2026-12-20,EX|DZ|TR|LV|PU,Excavator Operator:2|Plant Operator:2|Rigger:2|Env Technician:2
+SALE-1008,CUST-007,Industrial,Fixed plant maintenance panel — gas terminal,3100000,Won,1.00,2026-07-15,2027-07-14,LV|GS|WS|AC,HD Fitter:5|Boilermaker:3|Auto Electrician:2|HSE Advisor:1
+SALE-1009,CUST-008,Industrial,Civil earthworks & haul road maintenance,1450000,Won,1.00,2026-08-10,2026-11-30,DZ|WC|EX|LV,Plant Operator:4|Haul Truck Operator:3|Site Supervisor:1
+SALE-1010,CUST-004,Recruitment,FIFO trades labour hire — sustaining capital,2200000,Won,1.00,2026-06-01,2027-05-31,AC|LV,Boilermaker:6|HD Fitter:6|Trades Assistant:4
+SALE-1011,CUST-002,Environmental,Produced water dewatering & monitoring,540000,Won,1.00,2026-08-20,2026-10-31,PU|EM|LV,Env Technician:3|Environmental Scientist:1
+SALE-1012,CUST-005,Industrial,Standby generator install & commissioning,410000,Lost,0.00,,,GS|LV,Auto Electrician:2|HD Fitter:2
+SALE-1013,CUST-003,Recruitment,Exploration camp labour hire,300000,Lost,0.00,,,AC|LV,Labourer:10
+SALE-1014,CUST-006,Industrial,Crusher reline shutdown,890000,Proposal,0.45,2027-01-10,2027-01-24,EX|GS|LV|WS,Boilermaker:4|Rigger:2|Trades Assistant:3
