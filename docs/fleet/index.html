@@ -104,6 +104,31 @@
     </div>
   </section>
 
+  <!-- Asset readiness vs sales pipeline -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <h2 class="kk-mt0">Asset readiness vs sales pipeline</h2>
+      <p class="kk-lead">Owned plant capacity by category against open enquiries
+        (<code>../data/sales/sales.json</code>, stage Proposal/Negotiation). Where owned units are
+        fully committed, new work needs <strong>hire / procurement</strong> — the plant equivalent of
+        the labour-hire gap. Indicative (category-level).</p>
+      <div class="kk-table-wrap" style="margin-bottom:24px">
+        <table class="kk-table">
+          <thead><tr><th>Category</th><th class="kk-num">Owned</th><th class="kk-num">Committed</th>
+            <th class="kk-num">Available</th><th class="kk-num">Open enquiries</th><th>Status</th></tr></thead>
+          <tbody id="capRows"></tbody>
+        </table>
+      </div>
+      <h3>Open enquiries — asset view</h3>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead><tr><th>Sale</th><th>Enquiry</th><th>Window</th><th>Asset needs</th><th>Coverage</th></tr></thead>
+          <tbody id="pipeRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- Cross-domain note -->
   <section class="kk-section">
     <div class="kk-container">
@@ -125,16 +150,18 @@
   Promise.all([
     fetch('../data/fleet/asset_register.json').then(r => { if(!r.ok) throw new Error('assets '+r.status); return r.json(); }),
     // Workforce's calendar — optional; page still renders if it's absent.
-    fetch('../data/workforce/bookings.json').then(r => r.ok ? r.json() : {jobs:[]}).catch(() => ({jobs:[]}))
+    fetch('../data/workforce/bookings.json').then(r => r.ok ? r.json() : {jobs:[]}).catch(() => ({jobs:[]})),
+    // Sales pipeline — optional; drives the asset-readiness view.
+    fetch('../data/sales/sales.json').then(r => r.ok ? r.json() : {sales:[]}).catch(() => ({sales:[]}))
   ])
-    .then(([assets, bookings]) => render(assets, (bookings && bookings.jobs) || [], (bookings && bookings.pooled_asset_ids) || []))
+    .then(([assets, bookings, salesDoc]) => render(assets, (bookings && bookings.jobs) || [], (bookings && bookings.pooled_asset_ids) || [], (salesDoc && salesDoc.sales) || []))
     .catch(err => {
       document.getElementById('kpi').innerHTML =
         '<p class="kk-demo-note">Asset data could not be loaded ('+err.message+'). '+
         'On a live GitHub Pages URL this loads from <code>../data/fleet/asset_register.json</code>.</p>';
     });
 
-  function render(ASSETS, JOBS, POOLED){
+  function render(ASSETS, JOBS, POOLED, SALES){
     const fmt = n => '$' + n.toLocaleString('en-AU');
     const fmtM = n => '$' + (n/1e6).toFixed(1) + 'M';
     const badge = s => ({Operational:'green', Maintenance:'amber', Standby:'navy'}[s] || 'navy');
@@ -261,6 +288,49 @@
       c.appendChild(el('div','kk-stat__value',t.v));
       c.appendChild(el('div','kk-stat__delta '+(t.up?'up':'down'), t.d));
       ds.appendChild(c);
+    });
+
+    // ---- Asset readiness vs sales pipeline ----
+    const codeName = {}; Object.entries(CATCODE).forEach(([n,c]) => codeName[c] = n);
+    const owned = {}, committed = {};
+    ASSETS.forEach(a => { const c = a.asset_id.split('-')[1]; owned[c] = (owned[c]||0)+1; });
+    const committedSet = new Set();
+    JOBS.forEach(j => (j.asset_ids||[]).forEach(aid => { if(!pooledSet.has(aid)) committedSet.add(aid); }));
+    committedSet.forEach(aid => { const c = aid.split('-')[1]; committed[c] = (committed[c]||0)+1; });
+    const pipeline = (SALES||[]).filter(s => s.stage === 'Proposal' || s.stage === 'Negotiation');
+    const demandCount = {};
+    pipeline.forEach(s => (((s.resource_needs||{}).asset_categories)||[]).forEach(c => demandCount[c] = (demandCount[c]||0)+1));
+    const avail = c => (owned[c]||0) - (committed[c]||0);
+    const capRows = document.getElementById('capRows');
+    Object.keys(owned).sort().forEach(c => {
+      const av = avail(c), dem = demandCount[c]||0;
+      const status = (dem>0 && av<=0) ? '<span class="kk-badge kk-badge--red">hire needed</span>'
+                   : (dem>0 && av<dem) ? '<span class="kk-badge kk-badge--amber">tight</span>'
+                   : (av>0 ? '<span class="kk-badge kk-badge--green">capacity</span>'
+                           : '<span class="kk-badge kk-badge--navy">fully committed</span>');
+      capRows.appendChild(el('tr',null,
+        `<td><span class="kk-badge kk-badge--orange">${c}</span> ${codeName[c]||c}</td>`+
+        `<td class="kk-num">${owned[c]||0}</td><td class="kk-num">${committed[c]||0}</td>`+
+        `<td class="kk-num">${av}</td><td class="kk-num">${dem}</td><td>${status}</td>`));
+    });
+    const pipeRows = document.getElementById('pipeRows');
+    if(!pipeline.length){
+      pipeRows.innerHTML = '<tr><td colspan="5" class="kk-muted">No open enquiries in the pipeline.</td></tr>';
+    }
+    pipeline.forEach(s => {
+      const cats = ((s.resource_needs||{}).asset_categories)||[];
+      const needs = cats.map(c => {
+        const cls = avail(c) <= 0 ? (demandCount[c] ? 'red' : 'navy') : 'green';
+        return `<span class="kk-badge kk-badge--${cls}">${c}</span>`;
+      }).join(' ') || '—';
+      const anyHire = cats.some(c => avail(c) <= 0);
+      const cov = anyHire ? '<span class="kk-badge kk-badge--red">hire required</span>'
+                          : '<span class="kk-badge kk-badge--green">from owned fleet</span>';
+      const win = (s.start_date && s.end_date) ? `${s.start_date} → ${s.end_date}` : '—';
+      pipeRows.appendChild(el('tr',null,
+        `<td><strong>${s.sale_id}</strong></td>`+
+        `<td>${s.description||''}<div class="kk-card__meta">${s.service_line||''} · $${(s.value_aud||0).toLocaleString('en-AU')}</div></td>`+
+        `<td class="kk-card__meta">${win}</td><td>${needs}</td><td>${cov}</td>`));
     });
   }
   </script>
