@@ -238,8 +238,9 @@
     <div class="kk-container">
       <div class="kk-eyebrow">Data model · <code>employee</code> (EMP-###)</div>
       <h2>Employee register — sample</h2>
-      <p class="kk-lead">Representative extract of the workforce master. The full synthetic set and schema live in the
-        repo: <code>/data/workforce/employees.json</code>.</p>
+      <p class="kk-lead">Representative extract of the workforce master. The full synthetic set is published with the site
+        (<a href="../data/workforce/employees.json"><code>data/workforce/employees.json</code></a>) and the canonical
+        model in <a href="https://github.com/bmcevoyau/pipes-demo/blob/main/docs/data/schema.md"><code>schema.md</code></a>.</p>
       <div class="kk-table-wrap">
         <table class="kk-table">
           <thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Service line</th><th>Home base</th><th>Status</th><th>Indigenous</th></tr></thead>
@@ -267,12 +268,61 @@
         <strong>JOB</strong> that books <strong>assets</strong> (Assets) and <strong>employees</strong> (Workforce)
         over a date range. A resource can't be double-booked on overlapping dates.</p>
       <div id="calendar-mount">
-        <p class="kk-demo-note">Live bookings are being wired to Sales' <code>SALE-####</code> ids and Assets' <code>KK-</code> tags — populating shortly.</p>
+        <p class="kk-demo-note">Loading live bookings from <code>data/workforce/bookings.json</code>…</p>
       </div>
     </div>
   </section>
 
   <div id="site-footer"></div>
+
+  <script>
+    // Render the shared booking calendar (job entity) live from canonical data.
+    (function () {
+      var mount = document.getElementById('calendar-mount');
+      var fmt = function (d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-AU', { day: '2-digit', month: 'short', yyyy: 'numeric' }).replace(/,/, ''); };
+      var statusBadge = function (s) {
+        var m = { 'In Progress': 'orange', 'Scheduled': 'navy', 'Completed': 'green', 'Cancelled': 'red' };
+        return '<span class="kk-badge kk-badge--' + (m[s] || 'navy') + '">' + s + '</span>';
+      };
+      fetch('../data/workforce/bookings.json')
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (data) {
+          var jobs = data.jobs || [];
+          var rows = jobs.map(function (j) {
+            var short = j.shortfall > 0
+              ? '<span class="kk-badge kk-badge--red">-' + j.shortfall + '</span>'
+              : '<span class="kk-badge kk-badge--green">0</span>';
+            return '<tr>' +
+              '<td><strong>' + j.job_id + '</strong></td>' +
+              '<td>' + j.sale_id + '</td>' +
+              '<td>' + j.service_line + '</td>' +
+              '<td>' + j.site.replace('Pilbara - ', '') + '</td>' +
+              '<td class="kk-num">' + fmt(j.start_date) + ' – ' + fmt(j.end_date) + '</td>' +
+              '<td>' + statusBadge(j.status) + '</td>' +
+              '<td>' + j.asset_ids.map(function (a) { return '<span class="kk-badge kk-badge--navy" style="margin:1px">' + a + '</span>'; }).join(' ') + '</td>' +
+              '<td class="kk-num">' + j.crew_booked + ' / ' + j.crew_required + '</td>' +
+              '<td class="kk-num">' + short + '</td>' +
+            '</tr>';
+          }).join('');
+          var t = data.totals || {};
+          mount.innerHTML =
+            '<div class="kk-table-wrap"><table class="kk-table"><thead><tr>' +
+            '<th>Job</th><th>Sale</th><th>Service line</th><th>Site</th><th>Booking window</th><th>Status</th>' +
+            '<th>Assets booked</th><th class="kk-num">Crew (bkd/req)</th><th class="kk-num">Shortfall</th>' +
+            '</tr></thead><tbody>' + rows +
+            '<tr style="background:var(--kk-cream);font-weight:700"><td colspan="7">Totals — ' + (t.jobs || jobs.length) + ' active jobs</td>' +
+            '<td class="kk-num">' + (t.crew_booked || '') + ' / ' + (t.crew_required || '') + '</td>' +
+            '<td class="kk-num"><span class="kk-badge kk-badge--red">-' + (t.shortfall || '') + '</span></td></tr>' +
+            '</tbody></table></div>' +
+            '<p class="kk-demo-note" style="margin-top:14px">Each job books real <code>KK-</code> asset ids (Assets) and <code>EMP-###</code> crew (Workforce) against a won <code>SALE-####</code> (Sales). The <strong>34-FTE shortfall</strong> across the active calendar is what drives the recruitment &amp; labour-hire pipeline above.</p>';
+        })
+        .catch(function (e) {
+          mount.innerHTML = '<p class="kk-demo-note">Calendar data unavailable in this preview (' + e.message +
+            '). View the source: <a href="../data/workforce/bookings.json"><code>data/workforce/bookings.json</code></a>.</p>';
+        });
+    })();
+  </script>
+
   <script src="../assets/js/include.js" data-active="workforce"></script>
 </body>
 </html>
