@@ -87,6 +87,23 @@
     </div>
   </section>
 
+  <!-- Asset deployment (cross-domain join to Workforce bookings) -->
+  <section class="kk-section kk-section--dark">
+    <div class="kk-container">
+      <h2 class="kk-mt0">Asset deployment &amp; availability</h2>
+      <p class="kk-lead" style="color:#cfe0e6">Live join to Workforce Planning's booking calendar
+        (<code>../data/workforce/bookings.json</code> &rarr; <code>JOB-####</code>): which assets are on jobs
+        now, which are free for new work, and any double-bookings to resolve.</p>
+      <div class="kk-grid kk-grid--3" id="deploySummary" style="margin-bottom:24px"></div>
+      <div class="kk-table-wrap">
+        <table class="kk-table">
+          <thead><tr><th>Asset ID</th><th>Category</th><th>Booked to (JOB)</th><th>Window</th></tr></thead>
+          <tbody id="deployRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- Cross-domain note -->
   <section class="kk-section">
     <div class="kk-container">
@@ -105,16 +122,19 @@
 
   <script>
   // Data lives under /docs/data so GitHub Pages serves it; fetch same-origin.
-  fetch('../data/fleet/asset_register.json')
-    .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(render)
+  Promise.all([
+    fetch('../data/fleet/asset_register.json').then(r => { if(!r.ok) throw new Error('assets '+r.status); return r.json(); }),
+    // Workforce's calendar — optional; page still renders if it's absent.
+    fetch('../data/workforce/bookings.json').then(r => r.ok ? r.json() : {jobs:[]}).catch(() => ({jobs:[]}))
+  ])
+    .then(([assets, bookings]) => render(assets, (bookings && bookings.jobs) || []))
     .catch(err => {
       document.getElementById('kpi').innerHTML =
         '<p class="kk-demo-note">Asset data could not be loaded ('+err.message+'). '+
         'On a live GitHub Pages URL this loads from <code>../data/fleet/asset_register.json</code>.</p>';
     });
 
-  function render(ASSETS){
+  function render(ASSETS, JOBS){
     const fmt = n => '$' + n.toLocaleString('en-AU');
     const fmtM = n => '$' + (n/1e6).toFixed(1) + 'M';
     const badge = s => ({Operational:'green', Maintenance:'amber', Standby:'navy'}[s] || 'navy');
@@ -201,6 +221,41 @@
     const siteRows = document.getElementById('siteRows');
     Object.entries(bySite).sort((a,b)=>b[1]-a[1]).forEach(([s,n])=>{
       siteRows.appendChild(el('tr',null,`<td>${s}</td><td class="kk-num"><strong>${n}</strong></td>`));
+    });
+
+    // ---- Asset deployment: join to Workforce booking calendar ----
+    const deployMap = {};                 // asset_id -> [jobs it's booked on]
+    JOBS.forEach(j => (j.asset_ids||[]).forEach(aid => (deployMap[aid] ||= []).push(j)));
+    const overlaps = (a,b) => a.start_date <= b.end_date && b.start_date <= a.end_date; // ISO strings compare fine
+    let deployed = 0, conflicts = 0;
+    const dRows = document.getElementById('deployRows');
+    ASSETS.forEach(r=>{
+      const js = deployMap[r.asset_id] || [];
+      if(js.length) deployed++;
+      let conflict = false;
+      for(let i=0;i<js.length;i++) for(let k=i+1;k<js.length;k++) if(overlaps(js[i],js[k])) conflict = true;
+      if(conflict) conflicts++;
+      const booked = js.length
+        ? js.map(j=>`<span class="kk-badge kk-badge--navy">${j.job_id}</span>`).join(' ') +
+          (conflict ? ' <span class="kk-badge kk-badge--red">double-booked</span>' : '')
+        : '<span class="kk-badge kk-badge--green">Available</span>';
+      const win = js.length ? js.map(j=>`${j.start_date} → ${j.end_date}`).join('<br>') : '—';
+      dRows.appendChild(el('tr',null,
+        `<td><strong>${r.asset_id}</strong></td><td>${r.category}</td>`+
+        `<td>${booked}</td><td class="kk-card__meta">${win}</td>`));
+    });
+    const ds = document.getElementById('deploySummary');
+    const avail = ASSETS.length - deployed;
+    [
+      {l:'Deployed to jobs', v:deployed+' / '+ASSETS.length, d:'across '+JOBS.length+' active jobs', up:true},
+      {l:'Available now', v:avail, d:'ready for new work', up:true},
+      {l:'Booking conflicts', v:conflicts, d:conflicts?'assets double-booked — review':'no clashes', up:!conflicts},
+    ].forEach(t=>{
+      const c = el('div','kk-stat kk-stat--accent');
+      c.appendChild(el('div','kk-stat__label',t.l));
+      c.appendChild(el('div','kk-stat__value',t.v));
+      c.appendChild(el('div','kk-stat__delta '+(t.up?'up':'down'), t.d));
+      ds.appendChild(c);
     });
   }
   </script>
