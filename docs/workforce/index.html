@@ -279,7 +279,7 @@
     // Render the shared booking calendar (job entity) live from canonical data.
     (function () {
       var mount = document.getElementById('calendar-mount');
-      var fmt = function (d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-AU', { day: '2-digit', month: 'short', yyyy: 'numeric' }).replace(/,/, ''); };
+      var fmt = function (d) { return new Date(d + 'T00:00:00').toLocaleDateString('en-AU', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/,/, ''); };
       var statusBadge = function (s) {
         var m = { 'In Progress': 'orange', 'Scheduled': 'navy', 'Completed': 'green', 'Cancelled': 'red' };
         return '<span class="kk-badge kk-badge--' + (m[s] || 'navy') + '">' + s + '</span>';
