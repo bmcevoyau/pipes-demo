@@ -9,15 +9,27 @@
       "service_line": "Industrial",
       "site": "Pilbara - Newman",
       "stage": "Negotiation",
+      "value_aud": 6500000,
       "proposed_window": "2026-10-05 to 2026-10-25",
       "camp_capacity": 200,
-      "anticipated_onsite_crew": 90,
-      "internal_deployable_now": 7,
-      "anticipated_shortfall": 83,
-      "fill_strategy": "Labour-hire mobilisation + recruitment surge (mechanical trades: HD fitters, boilermakers, plant operators, supervisors)",
-      "asset_dependency": "Accommodation (AC) & workshop (WS) = 0 owned free → Assets to hire/procure (Bob)",
+      "anticipated_onsite_crew": 88,
+      "internal_deployable_now": 4,
+      "anticipated_shortfall": 84,
+      "deployable_note": "Only 4 free crew match BHP's required trades (Scaffolder×2, Rigger×1, HSE×1). 3 free Blast/Vac operators are out-of-scope for a mechanical shutdown. All fitters/boilermakers/plant-ops/supervisors are committed to existing jobs across the window.",
+      "role_breakdown": [
+        { "role": "Boilermaker",       "required": 20, "internal_available": 0, "gap": 20 },
+        { "role": "Trades Assistant",  "required": 20, "internal_available": 0, "gap": 20 },
+        { "role": "HD Diesel Fitter",  "required": 15, "internal_available": 0, "gap": 15 },
+        { "role": "Scaffolder",        "required": 12, "internal_available": 2, "gap": 10 },
+        { "role": "Rigger / Dogger",   "required": 10, "internal_available": 1, "gap": 9 },
+        { "role": "Auto Electrician",  "required": 4,  "internal_available": 0, "gap": 4, "note": "role not currently held — recruit/hire" },
+        { "role": "Site Supervisor",   "required": 4,  "internal_available": 0, "gap": 4 },
+        { "role": "HSE Advisor",       "required": 3,  "internal_available": 1, "gap": 2 }
+      ],
+      "fill_strategy": "Labour-hire mobilisation (bulk trades) + recruitment surge; Auto Electrician is a net-new capability to source.",
+      "asset_dependency": "resource_needs AC/LV/GS/WS/WC/EX/PU — AC (camp) & WS (workshop) = 0 owned free → Assets to hire/procure (Bob).",
       "status": "Active enquiry — JOB-2015 will be created on Won confirmation + locked dates/crew",
-      "scale_note": "If KingKira crews the full 200 (not ~90), shortfall scales to ~193 and camp sizing scales with it."
+      "scale_note": "88 = KingKira on-site crew (camp capacity 200 houses client + other contractors). If Ben sets KingKira crew to 200, shortfall and camp sizing scale up."
     }
   ]
 }
