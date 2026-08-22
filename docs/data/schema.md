@@ -35,7 +35,10 @@ Cindy writes it.
 
 ## 2. Shared enums
 
-- **service_line**: `Industrial` | `Environmental` | `Recruitment`
+- **service_line** (billable, used by `sale` + `job`): `Industrial` | `Environmental` | `Recruitment`
+- **employee service_line**: the three billable lines **plus** `Corporate` — overhead /
+  shared-services staff (e.g. HR, finance, admin, executive) not tied to a billable line.
+  `Corporate` is valid for `employee` only, never for `sale`/`job`.
 - **site**: `Perth - Applecross` (HQ) | `Pilbara - Newman` | `Pilbara - Tom Price` | `Pilbara - Karratha`
 - **asset status**: `Operational` | `Maintenance` | `Standby`
 - **job status**: `Scheduled` | `In Progress` | `Completed` | `Cancelled`
@@ -74,7 +77,7 @@ LV light vehicle · GS generator · PU pump · EM env monitor · WS workshop ·
 AC accommodation · TR trailer.
 
 ### employee  (Cindy) — `/docs/data/workforce/`
-`employee_id` `EMP-###`, name, role, service_line, skills[] (tickets/certs),
+`employee_id` `EMP-###`, name, role, service_line (incl. `Corporate` for overhead), skills[] (tickets/certs),
 site (home base), status (`Available`|`On Job`|`Leave`), employment_type
 (`Permanent`|`Labour Hire`|`Casual`), indigenous (bool, for empowerment metrics).
 
