@@ -1,6 +1,8 @@
 {
   "note": "The shared booking CALENDAR (job entity, JOB-####). Owned by Workforce Planning; read by all. Each JOB delivers a WON sale (sale_id) by booking real assets (KK- ids, Bob) + crew (EMP-### , Cindy) over a date window. crew_required vs crew_booked exposes the resourcing shortfall that drives the recruitment pipeline. Synthetic.",
   "generated": "2026-08-22",
+  "pooled_asset_ids": ["KK-LV-040", "KK-LV-041", "KK-LV-042"],
+  "pooled_note": "Light vehicles are a shared pool, not dedicated plant — overlapping bookings of these ids across jobs are intentional (crews draw from the LV pool), NOT double-bookings. Dedicated heavy plant (HT/EX/DZ/WC/GS/PU/EM/WS/AC/TR) is exclusively booked and must not overlap.",
   "jobs": [
     {
       "job_id": "JOB-2001", "sale_id": "SALE-1001", "customer_id": "CUST-001",
