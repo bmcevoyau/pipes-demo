@@ -1,0 +1,23 @@
+{
+  "note": "WFP pipeline resourcing outlook — anticipated crew demand from ACTIVE (not-yet-Won) sales enquiries. A JOB-#### booking is only created once a sale is Won (schema §4); until then the demand is tracked here so the board's live report reflects incoming work. Synthetic.",
+  "as_at": "2026-08-22",
+  "enquiries": [
+    {
+      "sale_id": "SALE-1015",
+      "customer_id": "CUST-009",
+      "customer": "BHP",
+      "service_line": "Industrial",
+      "site": "Pilbara - Newman",
+      "stage": "Negotiation",
+      "proposed_window": "2026-10-05 to 2026-10-25",
+      "camp_capacity": 200,
+      "anticipated_onsite_crew": 90,
+      "internal_deployable_now": 7,
+      "anticipated_shortfall": 83,
+      "fill_strategy": "Labour-hire mobilisation + recruitment surge (mechanical trades: HD fitters, boilermakers, plant operators, supervisors)",
+      "asset_dependency": "Accommodation (AC) & workshop (WS) = 0 owned free → Assets to hire/procure (Bob)",
+      "status": "Active enquiry — JOB-2015 will be created on Won confirmation + locked dates/crew",
+      "scale_note": "If KingKira crews the full 200 (not ~90), shortfall scales to ~193 and camp sizing scales with it."
+    }
+  ]
+}

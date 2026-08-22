@@ -259,6 +259,19 @@
     </div>
   </section>
 
+  <!-- PIPELINE RESOURCING OUTLOOK -->
+  <section class="kk-section">
+    <div class="kk-container">
+      <div class="kk-eyebrow">Pipeline · anticipated demand</div>
+      <h2>Pipeline resourcing outlook</h2>
+      <p class="kk-lead">Active sales enquiries not yet Won. We track anticipated crew demand here so incoming work is
+        visible before it books — a <code>JOB-####</code> is only created once a sale is confirmed Won.</p>
+      <div id="pipeline-mount">
+        <p class="kk-demo-note">Loading pipeline from <code>data/workforce/pipeline_resourcing.json</code>…</p>
+      </div>
+    </div>
+  </section>
+
   <!-- BOOKING CALENDAR -->
   <section class="kk-section kk-section--tint">
     <div class="kk-container">
@@ -319,6 +332,40 @@
         .catch(function (e) {
           mount.innerHTML = '<p class="kk-demo-note">Calendar data unavailable in this preview (' + e.message +
             '). View the source: <a href="../data/workforce/bookings.json"><code>data/workforce/bookings.json</code></a>.</p>';
+        });
+    })();
+  </script>
+
+  <script>
+    // Render the WFP pipeline resourcing outlook (active, not-yet-Won enquiries).
+    (function () {
+      var mount = document.getElementById('pipeline-mount');
+      if (!mount) return;
+      fetch('../data/workforce/pipeline_resourcing.json')
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function (data) {
+          var rows = (data.enquiries || []).map(function (e) {
+            return '<tr>' +
+              '<td>' + e.sale_id + '</td>' +
+              '<td>' + (e.customer || e.customer_id) + '</td>' +
+              '<td>' + e.service_line + '</td>' +
+              '<td>' + e.site.replace('Pilbara - ', '') + '</td>' +
+              '<td>' + e.proposed_window + '</td>' +
+              '<td><span class="kk-badge kk-badge--amber">' + e.stage + '</span></td>' +
+              '<td class="kk-num">' + e.anticipated_onsite_crew + '</td>' +
+              '<td class="kk-num">' + e.internal_deployable_now + '</td>' +
+              '<td class="kk-num"><span class="kk-badge kk-badge--red">-' + e.anticipated_shortfall + '</span></td>' +
+            '</tr>';
+          }).join('');
+          mount.innerHTML =
+            '<div class="kk-table-wrap"><table class="kk-table"><thead><tr>' +
+            '<th>Enquiry</th><th>Customer</th><th>Service line</th><th>Site</th><th>Proposed window</th><th>Stage</th>' +
+            '<th class="kk-num">Anticip. crew</th><th class="kk-num">Deployable now</th><th class="kk-num">Shortfall</th>' +
+            '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+            '<p class="kk-demo-note" style="margin-top:14px">Anticipated shortfall is filled by labour-hire mobilisation + a recruitment surge; accommodation/workshop gaps are procured by Assets. Converts to a <code>JOB-####</code> booking on Won confirmation.</p>';
+        })
+        .catch(function (e) {
+          mount.innerHTML = '<p class="kk-demo-note">No active enquiries to show (' + e.message + ').</p>';
         });
     })();
   </script>
