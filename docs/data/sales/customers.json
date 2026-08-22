@@ -14,6 +14,7 @@
     { "customer_id": "CUST-005", "name": "Northwest Shelf Utilities",   "industry": "Power & Water",  "site": "Pilbara - Karratha",  "account_manager": "Marcus Vance",    "since": "2023-09-05" },
     { "customer_id": "CUST-006", "name": "Goldfields Processing Co",     "industry": "Gold",           "site": "Pilbara - Newman",    "account_manager": "Priya Sundara",   "since": "2026-05-18" },
     { "customer_id": "CUST-007", "name": "Karratha Gas Terminal JV",    "industry": "Gas",            "site": "Pilbara - Karratha",  "account_manager": "Marcus Vance",    "since": "2021-11-30" },
-    { "customer_id": "CUST-008", "name": "Newman Civil Infrastructure", "industry": "Infrastructure", "site": "Pilbara - Newman",    "account_manager": "Liam O'Doherty",  "since": "2023-04-12" }
+    { "customer_id": "CUST-008", "name": "Newman Civil Infrastructure", "industry": "Infrastructure", "site": "Pilbara - Newman",    "account_manager": "Liam O'Doherty",  "since": "2023-04-12" },
+    { "customer_id": "CUST-009", "name": "BHP",                         "industry": "Iron Ore",       "site": "Pilbara - Newman",    "account_manager": "Danielle Warra",  "since": "2026-08-22" }
   ]
 }
