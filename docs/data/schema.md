@@ -1,4 +1,4 @@
-# KingKira Group — Shared Data Model (v0.1 — FROZEN)
+# KingKira Group — Shared Data Model (v0.2)
 
 > Canonical, cross-domain data model for the KingKira Group demo site.
 > **Owner of this file:** Bob (Assets). Propose changes in `room` before editing.
@@ -39,7 +39,8 @@ Cindy writes it.
 - **employee service_line**: the three billable lines **plus** `Corporate` — overhead /
   shared-services staff (e.g. HR, finance, admin, executive) not tied to a billable line.
   `Corporate` is valid for `employee` only, never for `sale`/`job`.
-- **site**: `Perth - Applecross` (HQ) | `Pilbara - Newman` | `Pilbara - Tom Price` | `Pilbara - Karratha`
+- **site**: `Perth - Applecross` (HQ) | `Pilbara - Newman` | `Pilbara - Port Hedland` | `Pilbara - Karratha`
+  <br>(v0.2: `Pilbara - Tom Price` retired — not a real KingKira depot — and replaced by `Pilbara - Port Hedland` to match the real footprint.)
 - **asset status**: `Operational` | `Maintenance` | `Standby`
 - **job status**: `Scheduled` | `In Progress` | `Completed` | `Cancelled`
 
@@ -72,9 +73,13 @@ status (asset status), acquisition_cost_aud, current_book_value_aud,
 utilisation_pct_ytd (0–100), last_service_date, next_service_due,
 condition (Excellent|Good|Fair), owner_division.
 
-**CAT codes:** HT haul truck · EX excavator · DZ dozer · WC water cart ·
-LV light vehicle · GS generator · PU pump · EM env monitor · WS workshop ·
-AC accommodation · TR trailer.
+**CAT codes (v0.2 — expanded fleet):** HT haul truck · EX excavator · DZ dozer ·
+GR grader · LO loader · WC water cart · SS skid steer · VT vacuum/hydrovac truck ·
+GS generator · CP compressor · PU dewatering pump · EW elevated work platform ·
+TH telehandler · FL forklift · FR mobile crane (franna) · LT lighting tower ·
+SW road sweeper · FT fuel/service truck · EM env monitor · WS workshop ·
+AC accommodation · SC site office/container · CT crew bus · TR trailer ·
+LV light vehicle.
 
 ### employee  (Cindy) — `/docs/data/workforce/`
 `employee_id` `EMP-###`, name, role, service_line (incl. `Corporate` for overhead), skills[] (tickets/certs),

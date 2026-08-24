@@ -1,26 +1,126 @@
 asset_id,category,make_model,year,site,status,acquisition_cost_aud,current_book_value_aud,utilisation_pct_ytd,last_service_date,next_service_due,condition,owner_division
 KK-HT-001,Haul Truck,Caterpillar 777G,2019,Pilbara - Newman,Operational,3850000,2695000,88,2026-07-28,2026-09-25,Good,Industrial Services
 KK-HT-002,Haul Truck,Caterpillar 777G,2020,Pilbara - Newman,Operational,3910000,2932000,91,2026-08-05,2026-10-04,Good,Industrial Services
-KK-HT-003,Haul Truck,Komatsu HD785-7,2018,Pilbara - Tom Price,Maintenance,3620000,2172000,63,2026-08-12,2026-08-26,Fair,Industrial Services
+KK-HT-003,Haul Truck,Komatsu HD785-7,2018,Pilbara - Port Hedland,Maintenance,3620000,2172000,63,2026-08-12,2026-08-26,Fair,Industrial Services
 KK-EX-010,Excavator,Caterpillar 349,2021,Pilbara - Newman,Operational,1180000,944000,79,2026-08-01,2026-09-30,Good,Industrial Services
 KK-EX-011,Excavator,Komatsu PC490LC-11,2020,Pilbara - Karratha,Operational,1240000,868000,84,2026-07-19,2026-09-17,Good,Industrial Services
-KK-EX-012,Excavator,Hitachi ZX350,2017,Pilbara - Tom Price,Standby,980000,441000,41,2026-06-30,2026-08-29,Fair,Environmental Services
+KK-EX-012,Excavator,Hitachi ZX350,2017,Pilbara - Port Hedland,Standby,980000,441000,41,2026-06-30,2026-08-29,Fair,Environmental Services
 KK-DZ-020,Dozer,Caterpillar D8T,2019,Pilbara - Newman,Operational,1650000,1155000,72,2026-08-09,2026-10-08,Good,Industrial Services
 KK-DZ-021,Dozer,Komatsu D65PX-18,2022,Pilbara - Karratha,Operational,1720000,1462000,86,2026-08-14,2026-10-13,Excellent,Industrial Services
-KK-WC-030,Water Cart,Caterpillar 740 (30kL),2018,Pilbara - Tom Price,Operational,720000,432000,68,2026-07-25,2026-09-23,Good,Environmental Services
+KK-WC-030,Water Cart,Caterpillar 740 (30kL),2018,Pilbara - Port Hedland,Operational,720000,432000,68,2026-07-25,2026-09-23,Good,Environmental Services
 KK-WC-031,Water Cart,Volvo A40G (30kL),2021,Pilbara - Newman,Operational,760000,608000,81,2026-08-03,2026-10-02,Good,Environmental Services
 KK-LV-040,Light Vehicle,Toyota LandCruiser 79 Series,2023,Perth - Applecross,Operational,89000,71200,58,2026-08-10,2026-11-08,Excellent,Corporate
 KK-LV-041,Light Vehicle,Toyota HiLux SR5,2022,Pilbara - Karratha,Operational,72000,50400,74,2026-07-30,2026-10-28,Good,Recruitment & Labour Hire
 KK-LV-042,Light Vehicle,Toyota LandCruiser 79 Series,2021,Pilbara - Newman,Operational,84000,50400,77,2026-08-06,2026-11-04,Good,Industrial Services
 KK-GS-050,Generator,Cummins C550 D5 (550kVA),2020,Pilbara - Newman,Operational,145000,101500,90,2026-08-02,2026-10-01,Good,Industrial Services
-KK-GS-051,Generator,Cummins C275 D5 (275kVA),2019,Pilbara - Tom Price,Standby,92000,55200,37,2026-06-25,2026-08-24,Fair,Industrial Services
+KK-GS-051,Generator,Cummins C275 D5 (275kVA),2019,Pilbara - Port Hedland,Standby,92000,55200,37,2026-06-25,2026-08-24,Fair,Industrial Services
 KK-PU-060,Dewatering Pump,Sykes CP150i,2021,Pilbara - Karratha,Operational,68000,47600,82,2026-08-11,2026-10-10,Good,Environmental Services
 KK-PU-061,Dewatering Pump,Xylem Godwin HL160M,2022,Pilbara - Newman,Operational,74000,59200,79,2026-08-08,2026-10-07,Good,Environmental Services
 KK-EM-070,Environmental Monitor,Aeroqual AQS1 Air Quality Station,2023,Pilbara - Newman,Operational,42000,33600,64,2026-07-22,2026-10-20,Excellent,Environmental Services
-KK-EM-071,Environmental Monitor,Thermo Scientific pDR-1500 Dust,2022,Pilbara - Tom Price,Operational,18000,12600,59,2026-08-04,2026-11-02,Good,Environmental Services
+KK-EM-071,Environmental Monitor,Thermo Scientific pDR-1500 Dust,2022,Pilbara - Port Hedland,Operational,18000,12600,59,2026-08-04,2026-11-02,Good,Environmental Services
 KK-WS-080,Workshop Equipment,Lincoln Electric Welder Bank,2020,Perth - Applecross,Operational,56000,39200,70,2026-07-18,2026-10-16,Good,Industrial Services
 KK-WS-081,Workshop Equipment,Enerpac Hydraulic Press 50T,2019,Perth - Applecross,Operational,34000,20400,52,2026-06-28,2026-09-26,Fair,Industrial Services
 KK-AC-090,Site Accommodation,Modular Ablution Block x4,2021,Pilbara - Newman,Operational,210000,147000,95,2026-07-27,2026-10-25,Good,Recruitment & Labour Hire
 KK-AC-091,Site Accommodation,Modular Office Complex,2020,Pilbara - Karratha,Operational,320000,224000,88,2026-08-07,2026-11-05,Good,Recruitment & Labour Hire
 KK-TR-100,Trailer,Float Trailer 4-Row Extendable,2018,Pilbara - Newman,Operational,285000,171000,66,2026-07-24,2026-09-22,Good,Industrial Services
-KK-TR-101,Trailer,Side Tipper Road Train Set,2022,Pilbara - Tom Price,Maintenance,340000,272000,71,2026-08-13,2026-08-27,Good,Industrial Services
+KK-TR-101,Trailer,Side Tipper Road Train Set,2022,Pilbara - Port Hedland,Maintenance,340000,272000,71,2026-08-13,2026-08-27,Good,Industrial Services
+KK-AC-092,Site Accommodation,Modular Ablution Block x4,2022,Pilbara - Newman,Operational,227000,127000,72,2026-08-12,2026-11-10,Good,Recruitment & Labour Hire
+KK-AC-093,Site Accommodation,Modular Crib Room,2025,Pilbara - Port Hedland,Standby,222000,198000,38,2026-07-12,2026-11-09,Good,Recruitment & Labour Hire
+KK-AC-094,Site Accommodation,Modular Office Complex,2019,Pilbara - Karratha,Operational,243000,68000,55,2026-08-16,2026-12-14,Good,Recruitment & Labour Hire
+KK-AC-095,Site Accommodation,Wet Mess / Kitchen Module,2023,Pilbara - Karratha,Operational,325000,218000,77,2026-06-30,2026-11-27,Fair,Environmental Services
+KK-CP-230,Compressor,Atlas Copco XAS 400,2016,Pilbara - Karratha,Maintenance,93000,26000,43,2026-08-11,2027-01-08,Excellent,Industrial Services
+KK-CP-231,Compressor,Sullair 375H,2025,Pilbara - Port Hedland,Operational,65000,58000,76,2026-08-09,2026-12-07,Fair,Industrial Services
+KK-CP-232,Compressor,Atlas Copco XAS 400,2019,Pilbara - Port Hedland,Operational,82000,23000,58,2026-06-30,2026-09-28,Good,Environmental Services
+KK-CT-320,Crew Bus,Toyota Coaster 22-seat,2018,Pilbara - Newman,Operational,312000,87000,44,2026-07-11,2026-12-08,Good,Recruitment & Labour Hire
+KK-CT-321,Crew Bus,Volvo B8R 57-seat Coach,2025,Pilbara - Karratha,Operational,250000,222000,78,2026-07-12,2026-12-09,Fair,Recruitment & Labour Hire
+KK-CT-322,Crew Bus,Mercedes-Benz Sprinter 12-seat,2016,Pilbara - Newman,Operational,173000,48000,65,2026-08-11,2027-01-08,Good,Recruitment & Labour Hire
+KK-DZ-022,Dozer,Komatsu D65PX-18,2018,Pilbara - Port Hedland,Operational,1611000,451000,51,2026-08-10,2027-01-07,Good,Industrial Services
+KK-EM-072,Environmental Monitor,Aeroqual Dust Sentry,2019,Pilbara - Newman,Operational,40000,11000,55,2026-06-14,2026-10-12,Good,Industrial Services
+KK-EW-240,Elevated Work Platform,Genie S-85 Boom,2024,Perth - Applecross,Operational,120000,94000,80,2026-08-02,2026-11-30,Excellent,Industrial Services
+KK-EW-241,Elevated Work Platform,JLG 600AJ Boom,2020,Pilbara - Port Hedland,Operational,119000,40000,51,2026-07-24,2026-12-21,Good,Industrial Services
+KK-EW-242,Elevated Work Platform,Snorkel A46JRT,2017,Pilbara - Port Hedland,Operational,149000,42000,91,2026-08-19,2026-12-17,Good,Industrial Services
+KK-EW-243,Elevated Work Platform,Genie S-85 Boom,2024,Pilbara - Port Hedland,Operational,155000,121000,73,2026-08-10,2027-01-07,Good,Industrial Services
+KK-EX-013,Excavator,Hitachi ZX350,2024,Pilbara - Newman,Operational,1068000,833000,66,2026-08-19,2026-11-17,Good,Industrial Services
+KK-EX-014,Excavator,Volvo EC480,2017,Pilbara - Karratha,Operational,937000,262000,44,2026-07-06,2026-12-03,Good,Industrial Services
+KK-EX-015,Excavator,Komatsu PC490LC-11,2017,Perth - Applecross,Operational,1289000,361000,62,2026-07-13,2026-12-10,Fair,Industrial Services
+KK-EX-016,Excavator,Hitachi ZX350,2017,Pilbara - Newman,Operational,918000,257000,52,2026-08-09,2026-11-07,Excellent,Industrial Services
+KK-FL-260,Forklift,Hyster H3.5FT,2022,Pilbara - Newman,Operational,80000,45000,92,2026-07-25,2026-11-22,Good,Industrial Services
+KK-FL-261,Forklift,Combilift C4000,2019,Pilbara - Newman,Operational,46000,13000,50,2026-07-15,2026-10-13,Good,Industrial Services
+KK-FL-262,Forklift,Hyster H3.5FT,2024,Perth - Applecross,Operational,58000,45000,39,2026-07-17,2026-10-15,Fair,Industrial Services
+KK-FR-270,Mobile Crane,Terex Franna AT-20,2025,Pilbara - Newman,Operational,441000,392000,84,2026-06-25,2026-11-22,Fair,Industrial Services
+KK-FR-271,Mobile Crane,Terex Franna MAC25,2022,Pilbara - Newman,Operational,380000,213000,89,2026-07-25,2026-11-22,Good,Industrial Services
+KK-FT-300,Fuel Truck,Kenworth T410 Fuel/Lube,2016,Perth - Applecross,Operational,285000,80000,92,2026-08-02,2026-11-30,Fair,Industrial Services
+KK-FT-301,Fuel Truck,Kenworth T410 Fuel/Lube,2025,Pilbara - Karratha,Operational,305000,271000,95,2026-06-10,2026-10-08,Good,Industrial Services
+KK-GR-200,Grader,Caterpillar 14M,2022,Pilbara - Karratha,Operational,781000,437000,78,2026-07-22,2026-12-19,Good,Industrial Services
+KK-GR-201,Grader,John Deere 772G,2016,Pilbara - Newman,Operational,942000,264000,63,2026-07-23,2026-12-20,Good,Industrial Services
+KK-GR-202,Grader,John Deere 772G,2023,Pilbara - Karratha,Operational,743000,498000,46,2026-06-09,2026-11-06,Good,Industrial Services
+KK-GS-052,Generator,Cummins C900 D5 (900kVA),2018,Pilbara - Newman,Operational,122000,34000,68,2026-06-29,2026-09-27,Good,Environmental Services
+KK-GS-053,Generator,Cummins C550 D5 (550kVA),2023,Pilbara - Newman,Standby,108000,72000,82,2026-06-09,2026-11-06,Good,Industrial Services
+KK-GS-054,Generator,Cummins C275 D5 (275kVA),2025,Pilbara - Port Hedland,Operational,160000,142000,41,2026-08-12,2026-11-10,Fair,Environmental Services
+KK-HT-004,Haul Truck,Caterpillar 777G,2017,Pilbara - Karratha,Operational,3413000,956000,55,2026-08-02,2026-12-30,Excellent,Industrial Services
+KK-HT-005,Haul Truck,Caterpillar 785C,2025,Pilbara - Newman,Operational,3611000,3214000,39,2026-07-21,2026-12-18,Fair,Industrial Services
+KK-LO-210,Loader,Volvo L120,2022,Pilbara - Newman,Operational,727000,407000,46,2026-08-08,2026-11-06,Excellent,Industrial Services
+KK-LO-211,Loader,Caterpillar 966M,2022,Perth - Applecross,Operational,809000,453000,62,2026-06-21,2026-11-18,Good,Environmental Services
+KK-LO-212,Loader,Volvo L120,2017,Pilbara - Port Hedland,Operational,839000,235000,72,2026-07-07,2026-10-05,Good,Industrial Services
+KK-LT-280,Lighting Tower,Allight SL200,2017,Pilbara - Karratha,Operational,30000,8000,57,2026-06-28,2026-10-26,Good,Industrial Services
+KK-LT-281,Lighting Tower,Allight SL200,2022,Pilbara - Newman,Operational,29000,16000,62,2026-07-28,2026-12-25,Fair,Industrial Services
+KK-LT-282,Lighting Tower,Allight SL200,2020,Pilbara - Port Hedland,Operational,23000,8000,65,2026-06-03,2026-10-31,Good,Industrial Services
+KK-LT-283,Lighting Tower,Atlas Copco HiLight H5,2024,Pilbara - Newman,Standby,26000,20000,95,2026-07-29,2026-12-26,Excellent,Industrial Services
+KK-LT-284,Lighting Tower,Sunlite BossLite,2021,Pilbara - Newman,Operational,19000,9000,86,2026-07-11,2026-10-09,Good,Industrial Services
+KK-LV-043,Light Vehicle,Toyota LandCruiser 200 Series,2020,Pilbara - Newman,Operational,92000,31000,53,2026-06-08,2026-11-05,Good,Environmental Services
+KK-LV-044,Light Vehicle,Toyota LandCruiser 79 Series,2018,Pilbara - Karratha,Operational,83000,23000,60,2026-07-07,2026-11-04,Fair,Industrial Services
+KK-LV-045,Light Vehicle,Ford Ranger XLT,2024,Pilbara - Karratha,Operational,94000,73000,43,2026-06-28,2026-10-26,Fair,Recruitment & Labour Hire
+KK-LV-046,Light Vehicle,Ford Ranger XLT,2023,Pilbara - Newman,Operational,90000,60000,43,2026-06-29,2026-11-26,Good,Environmental Services
+KK-LV-047,Light Vehicle,Toyota LandCruiser 200 Series,2024,Pilbara - Karratha,Standby,84000,66000,65,2026-06-10,2026-10-08,Good,Industrial Services
+KK-LV-048,Light Vehicle,Toyota LandCruiser 200 Series,2019,Pilbara - Newman,Operational,75000,21000,50,2026-06-12,2026-11-09,Good,Recruitment & Labour Hire
+KK-LV-049,Light Vehicle,Toyota LandCruiser 79 Series,2025,Pilbara - Newman,Operational,94000,84000,71,2026-08-07,2026-11-05,Good,Industrial Services
+KK-LV-050,Light Vehicle,Toyota LandCruiser 79 Series,2024,Pilbara - Port Hedland,Standby,75000,58000,40,2026-06-10,2026-10-08,Good,Recruitment & Labour Hire
+KK-LV-051,Light Vehicle,Toyota LandCruiser 79 Series,2016,Pilbara - Newman,Operational,85000,24000,68,2026-07-07,2026-10-05,Excellent,Corporate
+KK-LV-052,Light Vehicle,Toyota LandCruiser 79 Series,2017,Pilbara - Karratha,Operational,81000,23000,42,2026-08-13,2026-11-11,Good,Corporate
+KK-LV-053,Light Vehicle,Ford Ranger XLT,2019,Pilbara - Karratha,Operational,75000,21000,86,2026-06-04,2026-11-01,Good,Industrial Services
+KK-LV-054,Light Vehicle,Toyota HiLux SR5,2020,Perth - Applecross,Operational,92000,31000,65,2026-06-01,2026-08-30,Fair,Industrial Services
+KK-LV-055,Light Vehicle,Isuzu D-Max,2019,Pilbara - Newman,Operational,78000,22000,43,2026-07-28,2026-12-25,Excellent,Environmental Services
+KK-LV-056,Light Vehicle,Toyota LandCruiser 200 Series,2023,Pilbara - Newman,Operational,79000,53000,52,2026-07-14,2026-12-11,Good,Industrial Services
+KK-LV-057,Light Vehicle,Toyota LandCruiser 79 Series,2025,Perth - Applecross,Operational,87000,77000,50,2026-06-11,2026-09-09,Good,Corporate
+KK-LV-058,Light Vehicle,Ford Ranger XLT,2016,Pilbara - Newman,Operational,76000,21000,57,2026-06-08,2026-10-06,Good,Recruitment & Labour Hire
+KK-LV-059,Light Vehicle,Toyota LandCruiser 79 Series,2020,Pilbara - Karratha,Operational,84000,29000,69,2026-06-04,2026-09-02,Good,Recruitment & Labour Hire
+KK-LV-060,Light Vehicle,Toyota LandCruiser 200 Series,2017,Perth - Applecross,Operational,77000,22000,81,2026-06-07,2026-11-04,Excellent,Recruitment & Labour Hire
+KK-LV-061,Light Vehicle,Isuzu D-Max,2025,Perth - Applecross,Operational,73000,65000,86,2026-06-14,2026-11-11,Good,Industrial Services
+KK-LV-062,Light Vehicle,Toyota HiLux SR5,2022,Pilbara - Newman,Standby,87000,49000,69,2026-06-20,2026-10-18,Good,Recruitment & Labour Hire
+KK-LV-063,Light Vehicle,Toyota LandCruiser 200 Series,2021,Pilbara - Port Hedland,Operational,81000,36000,69,2026-06-29,2026-11-26,Excellent,Industrial Services
+KK-LV-064,Light Vehicle,Isuzu D-Max,2017,Pilbara - Port Hedland,Maintenance,94000,26000,63,2026-08-19,2027-01-16,Fair,Industrial Services
+KK-LV-065,Light Vehicle,Ford Ranger XLT,2021,Pilbara - Port Hedland,Operational,86000,39000,69,2026-08-13,2026-11-11,Good,Corporate
+KK-LV-066,Light Vehicle,Ford Ranger XLT,2023,Pilbara - Newman,Operational,75000,50000,78,2026-07-20,2026-12-17,Good,Industrial Services
+KK-LV-067,Light Vehicle,Isuzu D-Max,2017,Pilbara - Port Hedland,Maintenance,77000,22000,91,2026-06-21,2026-09-19,Good,Recruitment & Labour Hire
+KK-LV-068,Light Vehicle,Isuzu D-Max,2020,Pilbara - Newman,Standby,82000,28000,68,2026-07-19,2026-11-16,Fair,Industrial Services
+KK-LV-069,Light Vehicle,Toyota LandCruiser 79 Series,2024,Perth - Applecross,Maintenance,89000,69000,46,2026-07-15,2026-11-12,Good,Environmental Services
+KK-LV-070,Light Vehicle,Isuzu D-Max,2020,Pilbara - Port Hedland,Operational,89000,30000,91,2026-06-18,2026-09-16,Good,Industrial Services
+KK-LV-071,Light Vehicle,Toyota LandCruiser 79 Series,2024,Pilbara - Newman,Maintenance,81000,63000,58,2026-07-20,2026-12-17,Good,Recruitment & Labour Hire
+KK-LV-072,Light Vehicle,Isuzu D-Max,2021,Pilbara - Port Hedland,Maintenance,89000,40000,83,2026-07-02,2026-10-30,Good,Industrial Services
+KK-LV-073,Light Vehicle,Toyota HiLux SR5,2025,Perth - Applecross,Maintenance,80000,71000,44,2026-06-24,2026-09-22,Fair,Industrial Services
+KK-LV-074,Light Vehicle,Toyota LandCruiser 200 Series,2022,Pilbara - Karratha,Operational,92000,52000,47,2026-07-17,2026-11-14,Fair,Recruitment & Labour Hire
+KK-PU-062,Dewatering Pump,Sykes GP150,2016,Pilbara - Port Hedland,Standby,74000,21000,74,2026-08-10,2027-01-07,Good,Industrial Services
+KK-PU-063,Dewatering Pump,Sykes CP150i,2017,Pilbara - Port Hedland,Operational,86000,24000,61,2026-06-24,2026-11-21,Good,Environmental Services
+KK-SC-310,Site Office,Container Store/Laydown,2018,Pilbara - Port Hedland,Operational,50000,14000,49,2026-07-02,2026-10-30,Good,Environmental Services
+KK-SC-311,Site Office,Container Ablution,2020,Pilbara - Karratha,Operational,46000,16000,91,2026-08-09,2026-12-07,Excellent,Industrial Services
+KK-SC-312,Site Office,40ft Site Office Container,2019,Pilbara - Newman,Standby,42000,12000,87,2026-08-14,2026-11-12,Good,Industrial Services
+KK-SC-313,Site Office,20ft Site Office Container,2019,Pilbara - Karratha,Operational,23000,6000,80,2026-07-23,2026-11-20,Good,Industrial Services
+KK-SS-330,Skid Steer,Kubota SVL75,2020,Pilbara - Karratha,Maintenance,96000,33000,53,2026-08-09,2026-11-07,Good,Environmental Services
+KK-SS-331,Skid Steer,Bobcat S770,2018,Perth - Applecross,Standby,91000,25000,68,2026-07-29,2026-11-26,Fair,Industrial Services
+KK-SS-332,Skid Steer,Bobcat S770,2024,Pilbara - Port Hedland,Operational,119000,93000,82,2026-07-11,2026-11-08,Good,Industrial Services
+KK-SW-290,Road Sweeper,Schwarze A7 Tornado,2025,Pilbara - Karratha,Operational,348000,310000,42,2026-05-31,2026-10-28,Good,Environmental Services
+KK-SW-291,Road Sweeper,Schwarze A7 Tornado,2019,Pilbara - Newman,Operational,292000,82000,82,2026-08-06,2026-12-04,Good,Environmental Services
+KK-TH-250,Telehandler,Merlo P40.17,2022,Pilbara - Karratha,Operational,149000,83000,57,2026-08-14,2026-12-12,Good,Industrial Services
+KK-TH-251,Telehandler,Merlo P40.17,2024,Perth - Applecross,Standby,202000,158000,64,2026-07-31,2026-10-29,Good,Industrial Services
+KK-TH-252,Telehandler,Manitou MT1840,2016,Pilbara - Newman,Operational,153000,43000,59,2026-06-28,2026-11-25,Good,Industrial Services
+KK-TR-102,Trailer,Drop Deck Semi,2017,Pilbara - Port Hedland,Operational,244000,68000,61,2026-06-22,2026-11-19,Good,Industrial Services
+KK-TR-103,Trailer,Float Trailer 4-Row Extendable,2025,Pilbara - Newman,Operational,307000,273000,72,2026-06-21,2026-10-19,Fair,Environmental Services
+KK-VT-220,Vacuum Truck,STG Hydrovac 6000,2019,Pilbara - Newman,Operational,465000,130000,59,2026-06-10,2026-09-08,Fair,Industrial Services
+KK-VT-221,Vacuum Truck,Vac-U-Digga VUD8000,2019,Pilbara - Newman,Maintenance,433000,121000,40,2026-08-10,2027-01-07,Good,Industrial Services
+KK-VT-222,Vacuum Truck,Kenworth T410 Hydrovac,2025,Pilbara - Newman,Operational,535000,476000,53,2026-06-28,2026-09-26,Excellent,Industrial Services
+KK-VT-223,Vacuum Truck,STG Hydrovac 6000,2022,Pilbara - Karratha,Operational,513000,287000,84,2026-08-07,2026-11-05,Good,Environmental Services
+KK-VT-224,Vacuum Truck,STG Hydrovac 6000,2019,Pilbara - Port Hedland,Operational,458000,128000,72,2026-06-26,2026-09-24,Good,Environmental Services
+KK-VT-225,Vacuum Truck,Vac-U-Digga VUD8000,2023,Pilbara - Karratha,Operational,582000,390000,92,2026-08-13,2027-01-10,Fair,Environmental Services
+KK-WC-032,Water Cart,Caterpillar 740 (30kL),2020,Pilbara - Karratha,Operational,846000,288000,86,2026-08-06,2027-01-03,Good,Environmental Services
+KK-WC-033,Water Cart,Volvo A40G (30kL),2018,Pilbara - Newman,Operational,756000,212000,48,2026-06-13,2026-09-11,Fair,Industrial Services
+KK-WS-082,Workshop Equipment,Lincoln Electric Welder Bank,2019,Pilbara - Newman,Maintenance,41000,11000,58,2026-08-09,2026-11-07,Good,Industrial Services

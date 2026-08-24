@@ -66,7 +66,7 @@
   <section class="kk-section kk-section--tint">
     <div class="kk-container">
       <h2 class="kk-mt0">Maintenance schedule</h2>
-      <p class="kk-lead">Assets due for service within 30 days (today: 22 Aug 2026). Proactive servicing protects uptime and safety.</p>
+      <p class="kk-lead">Assets due for service within 30 days (today: 24 Aug 2026). Proactive servicing protects uptime and safety.</p>
       <div class="kk-grid kk-grid--2">
         <div class="kk-table-wrap">
           <table class="kk-table">
@@ -178,7 +178,7 @@
     const fmtM = n => '$' + (n/1e6).toFixed(1) + 'M';
     const badge = s => ({Operational:'green', Maintenance:'amber', Standby:'navy'}[s] || 'navy');
     const CATCODE = {'Haul Truck':'HT','Excavator':'EX','Dozer':'DZ','Water Cart':'WC','Light Vehicle':'LV','Generator':'GS','Dewatering Pump':'PU','Environmental Monitor':'EM','Workshop Equipment':'WS','Site Accommodation':'AC','Trailer':'TR'};
-    const TODAY = new Date('2026-08-22');
+    const TODAY = new Date('2026-08-24');
     const el = (t,c,h)=>{const e=document.createElement(t); if(c)e.className=c; if(h!=null)e.innerHTML=h; return e;};
 
     // ---- KPIs ----
@@ -189,7 +189,7 @@
     const oper = ASSETS.filter(r=>r.status==='Operational').length;
     const dueSoon = ASSETS.filter(r=>{const d=new Date(r.next_service_due); return (d-TODAY)/864e5 <= 30;}).length;
     const kpis = [
-      {l:'Assets under management', v:total, d:'11 categories', up:true},
+      {l:'Assets under management', v:total, d:(new Set(ASSETS.map(r=>r.category)).size)+' categories', up:true},
       {l:'Fleet book value', v:fmtM(book), d:fmtM(acq)+' acquisition cost'},
       {l:'Avg utilisation YTD', v:util+'%', d:'target 70%', up:util>=70},
       {l:'Operational', v:oper+' / '+total, d:dueSoon+' due service ≤30d', up:true},
