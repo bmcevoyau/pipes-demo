@@ -1,6 +1,6 @@
 {
-  "note": "WFP pipeline resourcing outlook — anticipated crew demand from ACTIVE (not-yet-Won) sales enquiries. A JOB-#### booking is only created once a sale is Won (schema §4); until then the demand is tracked here so the board's live report reflects incoming work. Synthetic.",
-  "as_at": "2026-08-22",
+  "note": "WFP pipeline resourcing outlook — anticipated crew demand from ACTIVE (not-yet-Won) sales enquiries, resourced against the full ~400 workforce. A JOB-#### booking is only created once a sale is Won (schema §4). Synthetic.",
+  "as_at": "2026-08-24",
   "enquiries": [
     {
       "sale_id": "SALE-1015",
@@ -13,23 +13,23 @@
       "proposed_window": "2026-10-05 to 2026-10-25",
       "camp_capacity": 200,
       "anticipated_onsite_crew": 88,
-      "internal_deployable_now": 4,
-      "anticipated_shortfall": 84,
-      "deployable_note": "Only 4 free crew match BHP's required trades (Scaffolder×2, Rigger×1, HSE×1). 3 free Blast/Vac operators are out-of-scope for a mechanical shutdown. All fitters/boilermakers/plant-ops/supervisors are committed to existing jobs across the window.",
+      "internal_deployable_now": 57,
+      "anticipated_shortfall": 31,
+      "deployable_note": "Against the full ~400 roster, 57 of 88 fill internally from Available crew (incl. Auto Electricians — capability now held). Remaining 31 via the labour-hire pool + targeted recruitment of boilermakers/fitters.",
       "role_breakdown": [
-        { "role": "Boilermaker",       "required": 20, "internal_available": 0, "gap": 20 },
-        { "role": "Trades Assistant",  "required": 20, "internal_available": 0, "gap": 20 },
-        { "role": "HD Diesel Fitter",  "required": 15, "internal_available": 0, "gap": 15 },
-        { "role": "Scaffolder",        "required": 12, "internal_available": 2, "gap": 10 },
-        { "role": "Rigger / Dogger",   "required": 10, "internal_available": 1, "gap": 9 },
-        { "role": "Auto Electrician",  "required": 4,  "internal_available": 0, "gap": 4, "note": "role not currently held — recruit/hire" },
-        { "role": "Site Supervisor",   "required": 4,  "internal_available": 0, "gap": 4 },
-        { "role": "HSE Advisor",       "required": 3,  "internal_available": 1, "gap": 2 }
+        { "role": "Boilermaker",       "required": 20, "internal_available": 10, "gap": 10 },
+        { "role": "Trades Assistant",  "required": 20, "internal_available": 15, "gap": 5 },
+        { "role": "HD Diesel Fitter",  "required": 15, "internal_available": 9,  "gap": 6 },
+        { "role": "Scaffolder",        "required": 12, "internal_available": 7,  "gap": 5 },
+        { "role": "Rigger / Dogger",   "required": 10, "internal_available": 6,  "gap": 4 },
+        { "role": "Auto Electrician",  "required": 4,  "internal_available": 3,  "gap": 1 },
+        { "role": "Site Supervisor",   "required": 4,  "internal_available": 4,  "gap": 0 },
+        { "role": "HSE Advisor",       "required": 3,  "internal_available": 5,  "gap": 0 }
       ],
-      "fill_strategy": "Labour-hire mobilisation (bulk trades) + recruitment surge; Auto Electrician is a net-new capability to source.",
-      "asset_dependency": "resource_needs AC/LV/GS/WS/WC/EX/PU — AC (camp) & WS (workshop) = 0 owned free → Assets to hire/procure (Bob).",
+      "fill_strategy": "Labour-hire top-up (~31) + targeted recruitment for boilermakers & HD fitters. Scaling the workforce to ~400 cut this gap from ~84 to ~31 and closed the Auto Electrician capability hole.",
+      "asset_dependency": "resource_needs AC/LV/GS/WS/WC/EX/PU — camp (AC) & workshop (WS) bed-balance hired by Assets (Bob).",
       "status": "Active enquiry — JOB-2015 will be created on Won confirmation + locked dates/crew",
-      "scale_note": "88 = KingKira on-site crew (camp capacity 200 houses client + other contractors). If Ben sets KingKira crew to 200, shortfall and camp sizing scale up."
+      "scale_note": "Camp capacity 200 houses client + other contractors; KingKira on-site crew ~88. A concurrent second BHP shutdown in the same window would re-open a large gap (shared crew pool)."
     }
   ]
 }

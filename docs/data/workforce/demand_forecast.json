@@ -1,15 +1,15 @@
 {
-  "note": "Rolling workforce demand vs confirmed supply by financial-year quarter (KingKira FY = Jul–Jun). Synthetic.",
+  "note": "Rolling workforce demand vs confirmed supply by financial-year quarter (KingKira FY = Jul–Jun), at the ~400 workforce scale. Synthetic.",
   "unit": "FTE",
   "quarters": [
-    { "quarter": "FY26 Q1", "demand": 372, "supply": 357, "gap": -15, "key_driver": "Rio Tinto shutdown ramp-up (Pilbara)" },
-    { "quarter": "FY26 Q2", "demand": 410, "supply": 368, "gap": -42, "key_driver": "BHP environmental rehabilitation contract award" },
-    { "quarter": "FY26 Q3", "demand": 438, "supply": 395, "gap": -43, "key_driver": "Peak dry-season civil & shutdown works" },
-    { "quarter": "FY26 Q4", "demand": 401, "supply": 399, "gap": -2,  "key_driver": "Wet-season demobilisation" }
+    { "quarter": "FY26 Q1", "demand": 410, "supply": 392, "gap": -18, "key_driver": "Rio Tinto shutdown ramp-up (Pilbara)" },
+    { "quarter": "FY26 Q2", "demand": 452, "supply": 405, "gap": -47, "key_driver": "BHP environmental rehabilitation contract award" },
+    { "quarter": "FY26 Q3", "demand": 470, "supply": 428, "gap": -42, "key_driver": "Peak dry-season civil & shutdown works" },
+    { "quarter": "FY26 Q4", "demand": 431, "supply": 430, "gap": -1,  "key_driver": "Wet-season demobilisation" }
   ],
   "demand_by_service_line_next_qtr": [
-    { "service_line": "Industrial",    "demand": 236 },
-    { "service_line": "Environmental", "demand": 118 },
-    { "service_line": "Recruitment",   "demand": 56 }
+    { "service_line": "Industrial",    "demand": 258 },
+    { "service_line": "Environmental", "demand": 128 },
+    { "service_line": "Recruitment",   "demand": 64 }
   ]
 }

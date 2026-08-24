@@ -15,7 +15,7 @@
     },
     {
       "job_id": "JOB-2007", "sale_id": "SALE-1007", "customer_id": "CUST-001",
-      "service_line": "Environmental", "site": "Pilbara - Tom Price",
+      "service_line": "Environmental", "site": "Pilbara - Port Hedland",
       "start_date": "2026-09-01", "end_date": "2026-12-20", "status": "Scheduled",
       "asset_ids": ["KK-EX-010", "KK-DZ-020", "KK-TR-100", "KK-LV-041", "KK-PU-060"],
       "employee_ids": ["EMP-022", "EMP-042", "EMP-004", "EMP-024", "EMP-009", "EMP-029"],

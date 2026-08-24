@@ -1,14 +1,14 @@
 {
-  "note": "Indigenous employment & participation — central to KingKira's 100% Aboriginal female-owned mandate and the RISE 'Empower' value. Synthetic.",
+  "note": "Indigenous employment & participation — central to KingKira's 100% Aboriginal female-owned mandate and the RISE 'Empower' value. At ~400 workforce, Indigenous participation is ~40%. Synthetic.",
   "trend": [
-    { "period": "FY24", "indigenous_headcount": 118, "indigenous_pct": 31, "local_pilbara_hires": 64, "traineeships_active": 12, "retention_12m_pct": 74 },
-    { "period": "FY25", "indigenous_headcount": 141, "indigenous_pct": 33, "local_pilbara_hires": 79, "traineeships_active": 19, "retention_12m_pct": 79 },
-    { "period": "FY26 (target)", "indigenous_headcount": 175, "indigenous_pct": 38, "local_pilbara_hires": 100, "traineeships_active": 28, "retention_12m_pct": 85 }
+    { "period": "FY24", "indigenous_headcount": 118, "indigenous_pct": 34, "local_pilbara_hires": 64, "traineeships_active": 12, "retention_12m_pct": 74 },
+    { "period": "FY25", "indigenous_headcount": 158, "indigenous_pct": 40, "local_pilbara_hires": 92, "traineeships_active": 22, "retention_12m_pct": 80 },
+    { "period": "FY26 (target)", "indigenous_headcount": 190, "indigenous_pct": 44, "local_pilbara_hires": 120, "traineeships_active": 30, "retention_12m_pct": 85 }
   ],
   "programs": [
-    { "name": "Pilbara Local Employment Pathway", "focus": "Karratha / Port Hedland / Newman community hiring", "participants": 42 },
-    { "name": "School-based Traineeships",         "focus": "Yr 11–12 trades & environmental streams",        "participants": 19 },
-    { "name": "Women in Resources",                "focus": "Female participation in plant & trades roles",   "participants": 27 },
-    { "name": "Supervisor Ready",                  "focus": "Indigenous leadership development",               "participants": 11 }
+    { "name": "Pilbara Local Employment Pathway", "focus": "Newman / Port Hedland / Karratha community hiring", "participants": 68 },
+    { "name": "School-based Traineeships",         "focus": "Yr 11–12 trades & environmental streams",         "participants": 22 },
+    { "name": "Women in Resources",                "focus": "Female participation in plant & trades roles",    "participants": 41 },
+    { "name": "Supervisor Ready",                  "focus": "Indigenous leadership development",                "participants": 18 }
   ]
 }
