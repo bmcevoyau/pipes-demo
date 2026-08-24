@@ -1,6 +1,6 @@
 sale_id,customer_id,service_line,description,value_aud,stage,probability,start_date,end_date,asset_categories,employee_roles
 SALE-1001,CUST-001,Industrial,FY27 routine maintenance renewal — Newman haul fleet,4200000,Won,1.00,2026-08-01,2027-06-30,HT|LV|WS,HD Fitter:4|Boilermaker:2|Site Supervisor:1
-SALE-1002,CUST-004,Industrial,Shutdown turnaround — Tom Price processing plant,2400000,Negotiation,0.75,2026-09-15,2026-10-05,EX|WC|GS|LV,Boilermaker:6|Rigger:3|Scaffolder:4|HSE Advisor:1
+SALE-1002,CUST-004,Industrial,Shutdown turnaround — Port Hedland processing plant,2400000,Negotiation,0.75,2026-09-15,2026-10-05,EX|WC|GS|LV,Boilermaker:6|Rigger:3|Scaffolder:4|HSE Advisor:1
 SALE-1003,CUST-002,Industrial,Rotating equipment reliability program — Karratha,1650000,Proposal,0.55,2026-10-01,2027-03-31,LV|GS,HD Fitter:3|Auto Electrician:2|Site Supervisor:1
 SALE-1004,CUST-003,Environmental,Tailings rehabilitation & waste recycling,780000,Proposal,0.40,2026-11-01,2027-02-28,EX|WC|EM|LV,Environmental Scientist:2|Env Technician:3|Excavator Operator:2
 SALE-1005,CUST-006,Environmental,Environmental compliance audit + labour hire ramp,1200000,Negotiation,0.60,2026-10-12,2027-01-31,EM|LV,Environmental Scientist:2|Env Technician:4|Labourer:6

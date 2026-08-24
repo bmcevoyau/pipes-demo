@@ -34,7 +34,11 @@ SERVICE_LINES = {"Industrial", "Environmental", "Recruitment"}  # billable deliv
 # Employees may also be overhead/shared-services staff (schema §2): 'Corporate'
 # is valid for the employee entity only, never for a sale or job.
 EMPLOYEE_SERVICE_LINES = SERVICE_LINES | {"Corporate"}
-SITES = {"Perth - Applecross", "Pilbara - Newman", "Pilbara - Tom Price", "Pilbara - Karratha"}
+SITES = {"Perth - Applecross", "Pilbara - Newman", "Pilbara - Port Hedland", "Pilbara - Karratha"}  # schema v0.2 (Tom Price retired -> Port Hedland)
+# Asset category codes (schema v0.2, owned by Bob). Used as a soft guardrail to
+# catch typo'd category codes in asset_ids and sale resource_needs.
+ASSET_CAT_CODES = {"HT","EX","DZ","GR","LO","WC","SS","VT","GS","CP","PU","EW",
+                   "TH","FL","FR","LT","SW","FT","EM","WS","AC","SC","CT","TR","LV"}
 ASSET_STATUS = {"Operational", "Maintenance", "Standby"}
 JOB_STATUS = {"Scheduled", "In Progress", "Completed", "Cancelled"}
 
@@ -117,8 +121,8 @@ def main():
             warn(f"sale {sid}: service_line {s.get('service_line')!r} not in {sorted(SERVICE_LINES)}")
         rn = s.get("resource_needs") or {}
         for cat in rn.get("asset_categories", []):
-            if not re.match(r"^[A-Z]{2}$", str(cat)):
-                warn(f"sale {sid}: asset_category {cat!r} is not a 2-letter CAT code")
+            if cat not in ASSET_CAT_CODES:
+                warn(f"sale {sid}: asset_category {cat!r} not a known CAT code (schema v0.2)")
 
     # --- Asset enums ---
     for a in assets:
@@ -126,6 +130,9 @@ def main():
             warn(f"asset {a.get('asset_id')}: status {a.get('status')!r} not in {sorted(ASSET_STATUS)}")
         if a.get("site") not in SITES:
             warn(f"asset {a.get('asset_id')}: site {a.get('site')!r} not in known sites")
+        m = re.match(r"^KK-([A-Z]{2})-\d{3}$", str(a.get("asset_id", "")))
+        if m and m.group(1) not in ASSET_CAT_CODES:
+            warn(f"asset {a.get('asset_id')}: category code {m.group(1)!r} not in schema v0.2 CAT codes")
 
     # --- Employee enums ---
     for e in employees:
