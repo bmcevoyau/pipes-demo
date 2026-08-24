@@ -312,10 +312,10 @@
     const pipeline = (SALES||[]).filter(s => s.stage === 'Proposal' || s.stage === 'Negotiation');
     const demandCount = {};
     pipeline.forEach(s => (((s.resource_needs||{}).asset_categories)||[]).forEach(c => demandCount[c] = (demandCount[c]||0)+1));
-    const avail = c => (owned[c]||0) - (committed[c]||0);
+    const availCat = c => (owned[c]||0) - (committed[c]||0);
     const capRows = document.getElementById('capRows');
     Object.keys(owned).sort().forEach(c => {
-      const av = avail(c), dem = demandCount[c]||0;
+      const av = availCat(c), dem = demandCount[c]||0;
       const status = (dem>0 && av<=0) ? '<span class="kk-badge kk-badge--red">hire needed</span>'
                    : (dem>0 && av<dem) ? '<span class="kk-badge kk-badge--amber">tight</span>'
                    : (av>0 ? '<span class="kk-badge kk-badge--green">capacity</span>'
@@ -332,10 +332,10 @@
     pipeline.forEach(s => {
       const cats = ((s.resource_needs||{}).asset_categories)||[];
       const needs = cats.map(c => {
-        const cls = avail(c) <= 0 ? (demandCount[c] ? 'red' : 'navy') : 'green';
+        const cls = availCat(c) <= 0 ? (demandCount[c] ? 'red' : 'navy') : 'green';
         return `<span class="kk-badge kk-badge--${cls}">${c}</span>`;
       }).join(' ') || '—';
-      const anyHire = cats.some(c => avail(c) <= 0);
+      const anyHire = cats.some(c => availCat(c) <= 0);
       const cov = anyHire ? '<span class="kk-badge kk-badge--red">hire required</span>'
                           : '<span class="kk-badge kk-badge--green">from owned fleet</span>';
       const win = (s.start_date && s.end_date) ? `${s.start_date} → ${s.end_date}` : '—';
