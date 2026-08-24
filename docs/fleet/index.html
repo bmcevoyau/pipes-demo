@@ -262,6 +262,7 @@
       siteRows.appendChild(el('tr',null,`<td>${s}</td><td class="kk-num"><strong>${n}</strong></td>`));
     });
 
+    try {  // optional cross-domain sections — a failure here must never blank the core dashboard
     // ---- Asset deployment: join to Workforce booking calendar ----
     const deployMap = {};                 // asset_id -> [jobs it's booked on]
     JOBS.forEach(j => (j.asset_ids||[]).forEach(aid => (deployMap[aid] ||= []).push(j)));
@@ -367,6 +368,7 @@
         `<p class="kk-mb0 kk-muted">${p.summary||''}</p>`;
       planWrap.appendChild(card);
     });
+    } catch(e){ console.error('optional cross-domain sections error (core dashboard unaffected):', e); }
   }
   </script>
   <script src="../assets/js/include.js" data-active="fleet"></script>
