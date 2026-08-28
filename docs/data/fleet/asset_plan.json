@@ -1,13 +1,55 @@
 {
   "_meta": {
-    "note": "SYNTHETIC demo data — KingKira Group pipes-demo. Assets response to sales enquiries: which owned KK- assets are earmarked and what must be hired/procured. Owned by bob (Assets). Updated per Ben's rule when a new enquiry lands, and re-derived after the fleet expansion (schema v0.2, 125 assets). Firm booking (JOB-####) is created by Workforce on Won-confirm.",
+    "note": "SYNTHETIC demo data — KingKira Group pipes-demo. Assets response to sales enquiries: which owned KK- assets are earmarked and what must be hired/procured. Owned by bob (Assets). Firm booking (JOB-####) is created by Workforce; asset_ids below are handed to that JOB.",
     "entity": "asset_plan",
     "owner": "bob (Assets)",
     "schema": "/docs/data/schema.md v0.2",
-    "generated": "2026-08-24",
+    "generated": "2026-08-28",
     "currency": "AUD"
   },
   "plans": [
+    {
+      "sale_id": "SALE-1016",
+      "customer_id": "CUST-009",
+      "enquiry": "BHP WAIO shutdown/turnaround — 400-bed camp, Newman iron ore",
+      "stage": "Won",
+      "site": "Pilbara - Newman",
+      "window": { "start": "2026-10-05", "end": "2026-10-26", "status": "confirmed" },
+      "crew_anticipated": 172,
+      "asset_categories_required": ["AC", "WS", "GS", "WC", "EX", "PU", "TR", "LV"],
+      "allocated_owned": [
+        { "asset_id": "KK-EX-013", "category": "Excavator" },
+        { "asset_id": "KK-EX-014", "category": "Excavator" },
+        { "asset_id": "KK-WC-031", "category": "Water Cart" },
+        { "asset_id": "KK-WC-032", "category": "Water Cart" },
+        { "asset_id": "KK-GS-052", "category": "Generator" },
+        { "asset_id": "KK-GS-054", "category": "Generator" },
+        { "asset_id": "KK-PU-063", "category": "Dewatering Pump" },
+        { "asset_id": "KK-VT-220", "category": "Vacuum Truck" },
+        { "asset_id": "KK-VT-222", "category": "Vacuum Truck" },
+        { "asset_id": "KK-CP-231", "category": "Compressor" },
+        { "asset_id": "KK-LT-280", "category": "Lighting Tower" },
+        { "asset_id": "KK-LT-281", "category": "Lighting Tower" },
+        { "asset_id": "KK-TR-102", "category": "Trailer" },
+        { "asset_id": "KK-CT-320", "category": "Crew Bus" },
+        { "asset_id": "KK-SC-310", "category": "Site Office" },
+        { "asset_id": "KK-AC-092", "category": "Site Accommodation" },
+        { "asset_id": "KK-AC-094", "category": "Site Accommodation" },
+        { "asset_id": "KK-AC-095", "category": "Site Accommodation" }
+      ],
+      "from_pool": [
+        { "category": "LV", "source": "~18 light vehicles from 22 spare owned + shared pool", "note": "owned light-vehicle fleet covers site transport in full" }
+      ],
+      "hire_required": [
+        { "category": "AC", "item": "Camp accommodation balance (400-bed camp)", "qty": 400, "unit": "beds", "basis": "400-bed camp; owned modules (KK-AC-092/094/095) seed only a fraction → hire the balance" },
+        { "category": "AC", "item": "Ablution blocks", "qty": 14, "unit": "blocks", "basis": "~1 per 30 pax" },
+        { "category": "AC", "item": "Wet mess / kitchen + office/crib", "qty": 1, "unit": "complex", "basis": "400-pax messing" },
+        { "category": "WS", "item": "Workshop units", "qty": 2, "unit": "units", "basis": "all 3 owned workshop units committed — 0 spare" },
+        { "category": "PU", "item": "Dewatering pumps", "qty": 2, "unit": "units", "basis": "only 1 owned pump spare in the window" }
+      ],
+      "summary": "Owned fleet SELF-PERFORMS the plant scope — excavators, water carts, generators, vac trucks, compressor, lighting towers, trailers, crew bus, site office and ~18 light vehicles all allocated from owned units. Residual HIRE for a 400-pax shutdown: the CAMP (owned accommodation seeds only a fraction of 400 beds), 2 workshop units, and 2 extra dewatering pumps. The 125-asset fleet covers the plant; the camp is the headline hire. asset_ids above handed to Workforce for JOB on SALE-1016.",
+      "status": "Won — asset_ids allocated; hire package initiated; firm on JOB creation."
+    },
     {
       "sale_id": "SALE-1015",
       "customer_id": "CUST-009",
@@ -18,25 +60,19 @@
       "crew_anticipated": 88,
       "asset_categories_required": ["AC", "LV", "GS", "WS", "WC", "EX", "PU"],
       "allocated_owned": [
-        { "asset_id": "KK-EX-012", "category": "Excavator",  "readiness": "Available (1 of 5 spare EX)" },
-        { "asset_id": "KK-EX-013", "category": "Excavator",  "readiness": "Available" },
-        { "asset_id": "KK-WC-031", "category": "Water Cart", "readiness": "Available (1 of 3 spare WC)" },
-        { "asset_id": "KK-GS-051", "category": "Generator",  "readiness": "Available (svc 24 Aug done)" },
-        { "asset_id": "KK-GS-052", "category": "Generator",  "readiness": "Available" },
-        { "asset_id": "KK-PU-062", "category": "Dewatering Pump", "readiness": "Available (1 of 2 spare PU)" },
-        { "asset_id": "KK-AC-092", "category": "Site Accommodation", "readiness": "Available — partial camp (sleeper/ablution/office modules)" },
-        { "asset_id": "KK-AC-093", "category": "Site Accommodation", "readiness": "Available" }
+        { "asset_id": "KK-EX-015", "category": "Excavator" },
+        { "asset_id": "KK-WC-033", "category": "Water Cart" },
+        { "asset_id": "KK-GS-053", "category": "Generator" }
       ],
       "from_pool": [
-        { "category": "LV", "source": "shared light-vehicle pool + 26 spare owned LVs (post-expansion)", "note": "owned light-vehicle fleet now covers this job with room to spare" }
+        { "category": "LV", "source": "spare owned LVs + pool", "note": "covered from owned fleet" }
       ],
       "hire_required": [
-        { "category": "AC", "item": "Camp accommodation balance (beds beyond owned modules)", "qty": 160, "unit": "beds", "basis": "200-camp ≈ 230 beds (88 crew ×1.15 + client/other contractors); owned AC modules cover ~60-70 beds → hire the balance" },
-        { "category": "AC", "item": "Additional ablution blocks", "qty": 3, "unit": "blocks", "basis": "~1 per 30 pax across the full camp" },
-        { "category": "WS", "item": "Workshop unit", "qty": 1, "unit": "unit", "basis": "all 3 owned workshop units committed to existing jobs — 0 spare" }
+        { "category": "AC", "item": "Camp accommodation balance", "qty": 160, "unit": "beds", "basis": "200-camp ≈ 230 beds; owned modules seed part → hire balance" },
+        { "category": "WS", "item": "Workshop unit", "qty": 1, "unit": "unit", "basis": "owned workshop units committed" }
       ],
-      "gaps_summary": "Post fleet-expansion the owned fleet now self-performs the plant scope — excavators, water carts, generators, dewatering pumps and the light-vehicle fleet are all covered from spare owned units (no plant hire). Residual HIRE is (1) the workshop (all 3 owned units committed) and (2) the camp accommodation BALANCE — owned modules seed part of the 200-person camp but the bulk of beds is still hired. Much stronger owned-capacity position than the 25-asset fleet, while the large-camp hire remains the headline for a 200-pax shutdown.",
-      "status": "Provisional — firm allocation + JOB-2015 booking on Ben's Won-confirm and final crew/dates."
+      "summary": "Earlier BHP enquiry (still in negotiation). Owned fleet now self-performs the plant; residual hire = workshop + camp bed-balance. Superseded in priority by the WON SALE-1016.",
+      "status": "Provisional — pending its own Won-confirm."
     }
   ]
 }
