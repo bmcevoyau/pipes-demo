@@ -191,11 +191,8 @@
       ],
       "employee_ids": [
         "EMP-005",
-        "EMP-023",
-        "EMP-026",
         "EMP-038",
         "EMP-044",
-        "EMP-047",
         "EMP-050",
         "EMP-053",
         "EMP-056",
@@ -251,15 +248,15 @@
         "EMP-374"
       ],
       "crew_required": 172,
-      "crew_booked": 59,
-      "shortfall": 113,
-      "scope": "BHP WAIO iron-ore shutdown/turnaround, 400-bed camp (5-26 Oct). Camp accommodation & workshop HIRED (Assets); 113-trade shortfall mobilised via labour hire + recruitment surge."
+      "crew_booked": 56,
+      "shortfall": 116,
+      "scope": "BHP WAIO iron-ore shutdown/turnaround, 400-bed camp (5-26 Oct). Camp accommodation & workshop HIRED (Assets); 116-trade shortfall mobilised via labour hire + recruitment. (3 crew released — already committed to Oct jobs, caught by data-integrity check.)"
     }
   ],
   "totals": {
     "jobs": 7,
     "crew_required": 226,
-    "crew_booked": 79,
-    "shortfall": 147
+    "crew_booked": 76,
+    "shortfall": 150
   }
 }
