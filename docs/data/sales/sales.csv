@@ -14,3 +14,4 @@ SALE-1012,CUST-005,Industrial,Standby generator install & commissioning,410000,L
 SALE-1013,CUST-003,Recruitment,Exploration camp labour hire,300000,Lost,0.00,,,AC|LV,Labourer:10
 SALE-1014,CUST-006,Industrial,Crusher reline shutdown,890000,Proposal,0.45,2027-01-10,2027-01-24,EX|GS|LV|WS,Boilermaker:4|Rigger:2|Trades Assistant:3
 SALE-1015,CUST-009,Industrial,BHP shutdown maintenance — 200-person camp Newman iron ore,6500000,Negotiation,0.70,2026-10-05,2026-10-25,AC|LV|GS|WS|WC|EX|PU,Boilermaker:20|Rigger:10|Scaffolder:12|HD Fitter:15|Trades Assistant:20|Auto Electrician:4|HSE Advisor:3|Site Supervisor:4
+SALE-1016,CUST-009,Industrial,BHP WAIO shutdown/turnaround — 400-bed camp (iron ore),14000000,Won,1.00,2026-10-05,2026-10-26,AC|LV|GS|WS|WC|EX|PU|TR,Boilermaker:40|HD Fitter:30|Trades Assistant:36|Scaffolder:24|Rigger:20|Auto Electrician:8|Site Supervisor:8|HSE Advisor:6
